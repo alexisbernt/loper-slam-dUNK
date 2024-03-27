@@ -1,8 +1,12 @@
-# This is a sample Python script.
+# This is where the dashboard will be
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
+# Will implement a GUI
+
+# Will import the classes to connect to the GUI
+# In the classes, we should have the functionality implemented
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
