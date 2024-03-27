@@ -7,3 +7,6 @@
 The original application is a simple SQL web server application.
 We will repurpose this application so that the database's tables
 store data about coaches, athletes, their messages, and the coaches' announcements.
+
+## SQL Server Hosting
+We will be using Microsoft's SQL Server Management Studio to host and manage the SQL server our project will interact with.
