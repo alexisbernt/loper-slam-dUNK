@@ -3,3 +3,5 @@
 > - Blake Meyer: Security Specialist
 > - Dylan Norris: Doumentation Auditor
 > - Juan Garcia: Programming
+
+> As the SCRUM Master, 
