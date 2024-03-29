@@ -25,3 +25,8 @@ How to set up foreign keys in SQL:
 [https://www.w3schools.com/sql/sql_foreignkey.asp](https://www.w3schools.com/sql/sql_foreignkey.asp)
 How to connect to a local database in SQL Server Management Studio:
 [https://stackoverflow.com/questions/43257209/how-to-connect-to-a-local-database-in-sql-server-management-studio](https://stackoverflow.com/questions/43257209/how-to-connect-to-a-local-database-in-sql-server-management-studio)
+
+## How to install SSMS & SQL Server
+SQL Server is used to host the obvious. SSMS is used to manage said server. Here are links to download both (although you can just download SSMS via the SQL Server installer...):
+[https://www.microsoft.com/en-us/sql-server/sql-server-downloads](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+[https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16)
