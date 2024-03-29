@@ -8,4 +8,4 @@ Agile project for CYBR 404. Our group will be creating a software for athletic c
 - Juan Garcia: Programming
 
 ### Work so far!
-[Week 1](https://github.com/alexisbernt/loper-slam-dUNK/blob/059cdbffd079b85cec7e9e391144c254c888d310/Documentation/Week%201/Outline3-27.jpeg)
+[Sprint 1](https://github.com/alexisbernt/loper-slam-dUNK/blob/059cdbffd079b85cec7e9e391144c254c888d310/Documentation/Week%201/Outline3-27.jpeg)
