@@ -14,6 +14,6 @@ Agile project for CYBR 404. Our group will be creating a software for athletic c
 
 [MILESTONES](https://github.com/alexisbernt/loper-slam-dUNK/blob/906a9aafb52e05362f1690cd5bad9c498808643c/Documentation/Week%201/4.2.md)
 
-[TIMELINE](https://github.com/alexisbernt/loper-slam-dUNK/blob/906a9aafb52e05362f1690cd5bad9c498808643c/Documentation/Week%201/4.2.md)
+[TIMELINE](https://github.com/alexisbernt/loper-slam-dUNK/blob/906a9aafb52e05362f1690cd5bad9c498808643c/Documentation/Week%201/Agile%20Timeline.jpeg)
 
 [EXECUTIVE SUMMARY](https://github.com/alexisbernt/loper-slam-dUNK/blob/906a9aafb52e05362f1690cd5bad9c498808643c/Documentation/Week%201/4.2.md)
