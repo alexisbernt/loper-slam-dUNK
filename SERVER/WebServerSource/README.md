@@ -4,6 +4,8 @@ The solution is based on the traditional framework of:  |HTML5| <--> |PHP| <--> 
 -The BackEnd was built on a MySQL database having a single table to store the different words and their frequencies.
 -The Frontend and Bacakend were connected using PHP as the server-side scripting language.
 
+*Note: THIS SCRIPT HAS BEEN CONVERTED FROM MySQL TO SQL*
+
 # 1. Deployment
 To ensure a hastle-free testing experience, I have deployed my website live at http://vcanteen.000webhostapp.com/. 
 This was a vacant server available from one of my earlier hosted projects on 000webhost.com which is a site that provide a free hosting space of upto 2 websites.

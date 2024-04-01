@@ -1,11 +1,16 @@
 <?php
 
-$host = "localhost";
-$user = "id1449177_greyman";
-$password = "Callmegrey0k";
-$dbname = "1449177_ttt";
+$serverName = "SQL Server"; 
+$uid = "CoachLogin";   
+$pwd = "toast&s3ri@l#s";  
+$databaseName = "LoperSlamdUNK"; 
 
-$con = mysqli_connect($host,$user,$password,$dbname);
+$connectionInfo = array( "UID"=>$uid,                            
+                         "PWD"=>$pwd,                            
+                         "Database"=>$databaseName); 
+
+/* Connect using SQL Server Authentication. */  
+$con = odbc_connect("Driver=$serverName; Server=localhost; Database=$databaseName", $uid, $pwd);
 
 if(!$con){
   echo "Database not connected";

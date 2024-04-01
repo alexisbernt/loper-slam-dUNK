@@ -76,25 +76,24 @@
                     3.4 SQL Query for inserting each word and its count into the database.
                     (already inserted once)
                     $query = "insert into test(word,count) values('".$word."','".$count."');" ;
-                    $result = mysqli_query($con,$query);
+                    $result = odbc_exec($con,$query);
                     */
                 }
 
 
                 // 4.0 fetch results from database
-                $query = "SELECT * FROM test ORDER BY count DESC LIMIT $number;";
-                $result = mysqli_query($con,$query);
+                $query = "SELECT * FROM dbo.Athletes ORDER BY Name DESC LIMIT $number;";
+                $result = odbc_exec($con,$query);
 
-                while ($row = mysqli_fetch_assoc($result)) {
+                while ($row = odbc_result_all($result)) {
 
                   echo "
                   <tr class='row100 body'>
-                  <td class='cell100 column1'>" . $row['word'] . "</td>
-                  <td class='cell100 column2'>" . $row['count'] . "</td>
+                  <td class='cell100 column1'>" . $row['Name'] . "</td>
+                  <td class='cell100 column2'>" . $row['Description'] . "</td>
                   </tr>";
                 }
-
-                mysqli_close($con);
+                odbc_close($con);
                 ?>
 
                 </tbody>
