@@ -1,3 +1,5 @@
+#NOTE!!: Never use this file! This is just for future reference in case we need to modify the columns later for the licensing part of things...
+
 # MIT Licensed. Copyright (c) 2017
 # coding: utf-8
 # Run this script to produce the database this program uses
