@@ -1,12 +1,13 @@
-# This will be the calendar class
-# Juan will begin coding the calendar
 import calendar
 import matplotlib.pyplot as plt
 
 w_days = 'Sun Mon Tue Wed Thu Fri Sat'.split()
 m_names = 'January February March April May June July August September October November December'.split()
-#Ensure that the first day in the calendar is sunday
+# Setting Sunday as first day of the week
 calendar.setfirstweekday(6)
+
+
+# Calendar class is used to generate and display monthly calendars with events
 class Calendar:
     def __init__(self, year, month):
         self._year = year
@@ -15,8 +16,9 @@ class Calendar:
 
         self.events = [[[] for day in week] for week in self.cal]
 
+    # Function finds the index of a specific day in a month or raises an error if day doesn't exist
     def dayIndex(self, day):
-    #index of the day in the list of lists
+        # index of the day in the list of lists
         for week_n, week in enumerate(self.cal):
             try:
                 i = week.index(day)
@@ -25,36 +27,44 @@ class Calendar:
                 pass
         raise ValueError(f"There are not {day} days in the month")
 
+    # Function formats and generates calendar
     def show(self):
-    #formatting calendar
+        # Creates a grid w/ number of weeks in the month and 7 columns
+        # Values:f - figure name, axs - array of subplots
         f, axs = plt.subplots(len(self.cal), 7, sharex=True, sharey=True)
+        # Iterates through each week(ax_row) and each week_day(ax)
         for week, ax_row in enumerate(axs):
             for week_day, ax in enumerate(ax_row):
+                # Removes ticks for x-axis and y-axis
                 ax.set_xticks([])
                 ax.set_yticks([])
                 if self.cal[week][week_day] != 0:
+                    # Add the number value of the day to the subplot
                     ax.text(.02, .98,
                             str(self.cal[week][week_day]),
                             verticalalignment='top',
                             horizontalalignment='left')
+                    # Adds any events to calendar
                     contents = "\n".join(self.events[week][week_day])
-                    ax.text(.03, .85, contents,
+                    ax.text(.03, .80, contents,
                             verticalalignment='top',
                             horizontalalignment='left',
                             fontsize=9)
 
-        #using the titles of the weekdays(w_days) as first row
+        # Using the titles of the weekdays(w_days) as first row
         for n, day in enumerate(w_days):
             axs[0][n].set_title(day)
 
-        #
+        # Adjusting spacing between subplots
         f.subplots_adjust(hspace=0)
         f.subplots_adjust(wspace=0)
-        f.suptitle(m_names[self._month] + '' + str(self._year),
-                   fontsize=20, fontweight= 'bold')
+
+        # Adds the month and year titles
+        f.suptitle(m_names[self._month - 1] + ' ' + str(self._year),
+                   fontsize=20, fontweight='bold')
         plt.show()
 
-    #Function takes a string(event) and ensure that the date exist and adds to calendar
+    # Function takes a string(event) and ensure that the date exist and adds to calendar
     def addEvent(self, day, event):
         week, w_day = self.dayIndex(day)
         self.events[week][w_day].append(event)
