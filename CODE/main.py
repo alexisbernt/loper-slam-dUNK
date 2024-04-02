@@ -9,13 +9,15 @@ from RandomizerClass import RandomClass
 from CommunicationClass import Communication
 from CalendarClass import Calendar
 # In the classes, we should have the functionality implemented
+
+
 class SlamdUNK:
     def __init__(self):
         self.window = tk.Tk()
-        self.communication = Communication() # create instance of the class
+        self.communication = Communication()  # create instance of the class
         # JUAN, PLEASE CONNECT YOUR BUTTON TO YOUR LIKING HERE :)
-        # self.calendar = Calendar() # create instance of the class
-        self.random = RandomClass()# create instance of the class
+        self.calendar = Calendar(2024, 4)  # create instance of the class
+        self.random = RandomClass()  # create instance of the class
 
         self.window.title("loper slam dUNK Version 1")
         self.window.geometry(f'{self.window.winfo_screenwidth() // 2}x{self.window.winfo_screenheight() // 1.5:.0f}')
@@ -24,7 +26,7 @@ class SlamdUNK:
         # self.open_screen()
         self.style = Style(theme="litera")  # creating ttkbootstrap style with the specified theme
         self.style.theme_use('litera')
-        self.dashboard_screen() # Call dashboard_screen method
+        self.dashboard_screen()  # Call dashboard_screen method
 
     def dashboard_screen(self):
         # Clear The Screen_________
@@ -46,9 +48,10 @@ class SlamdUNK:
         random_button.pack()
         # JUAN, you can edit your button here
         # You can use the command: command=lambda: self.[call class].[call function]() to connect the button
-        calendar_button = Button(self.window, text="CALENDAR", font=("Ariel", 15))
+        calendar_button = Button(self.window, text="CALENDAR", font=("Ariel", 15), command= lambda: self.calendar.show())
         self.on_screen.append(calendar_button)
         calendar_button.pack()
+
     def clear_screen(self):
         for item in self.on_screen:
             item.pack_forget()
@@ -56,6 +59,7 @@ class SlamdUNK:
 
     def clear_notes(self):
         self.notes.clear()
+
 
 run_instance = SlamdUNK()
 run_instance.window.mainloop()
