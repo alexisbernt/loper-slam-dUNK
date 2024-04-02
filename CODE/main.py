@@ -13,8 +13,8 @@ class SlamdUNK:
     def __init__(self):
         self.window = tk.Tk()
         self.communication = Communication() # create instance of the class
-        # JUAN, PLEASE CONNECT YOUR BUTTON TO YOUR LIKING HERE :)
-        # self.calendar = Calendar() # create instance of the class
+        # JUAN, PLEASE CONNECT YOUR BUTTON TO YOUR LIKING HERE :)d
+        self.calendar = Calendar(2024, 4) # create instance of the class
         self.random = RandomClass()# create instance of the class
 
         self.window.title("loper slam dUNK Version 1")
@@ -46,7 +46,7 @@ class SlamdUNK:
         random_button.pack()
         # JUAN, you can edit your button here
         # You can use the command: command=lambda: self.[call class].[call function]() to connect the button
-        calendar_button = Button(self.window, text="CALENDAR", font=("Ariel", 15))
+        calendar_button = Button(self.window, text="CALENDAR", font=("Ariel", 15), command= lambda: self.calendar.show())
         self.on_screen.append(calendar_button)
         calendar_button.pack()
     def clear_screen(self):
