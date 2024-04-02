@@ -13,7 +13,7 @@ class SlamdUNK:
     def __init__(self):
         self.window = tk.Tk()
         self.communication = Communication() # create instance of the class
-        # JUAN, PLEASE CONNECT YOUR BUTTON TO YOUR LIKING HERE :)d
+        # JUAN, PLEASE CONNECT YOUR BUTTON TO YOUR LIKING HERE :)
         self.calendar = Calendar(2024, 4) # create instance of the class
         self.random = RandomClass()# create instance of the class
 
