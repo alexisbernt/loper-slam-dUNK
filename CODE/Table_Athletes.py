@@ -20,11 +20,12 @@ class AthletesController:
         self.cursor.execute("SELECT * FROM Athletes where AthleteID = '"+id+"'")
         return self.cursor
 
-    # add team ID to this as it's required...
-    def addAthlete(self, name, athlete):
+    def addAthlete(self, name, team = None):
         self.cursor = self.cnxn.cursor()
+        intoStr = "(Name, TeamID); COMMIT;"
+        valuesStr = "VALUES ('"+name+", '"+str(team or "")+"'); COMMIT;"
         try:
-            self.cursor.execute("INSERT INTO Athletes (Name, AthleteID) VALUES ('"+name+"', '"+str(athlete)+"'); COMMIT;")
+            self.cursor.execute("INSERT INTO Athletes "+intoStr+" VALUES "+valuesStr+"; COMMIT;")
         except:
             return False
         else:
@@ -58,10 +59,3 @@ class AthletesController:
             return False
         else:
             return True
-
-
-
-
-
-
-

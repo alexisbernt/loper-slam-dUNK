@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[MessagesCtoA](
 		MessageID int IDENTITY(1,1) NOT NULL,
 		[Subject] [nvarchar](255) NOT NULL,
 		[Description] [nvarchar](255) NOT NULL,
+		DateCreated DATETIME NOT NULL,
 		CoachID INT,
 		AthleteID INT,
 		PRIMARY KEY (MessageID),

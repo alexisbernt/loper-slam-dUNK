@@ -20,10 +20,10 @@ class CoachesController:
         self.cursor.execute("SELECT * FROM Coach where CoachID = '"+id+"'")
         return self.cursor
 
-    def addCoach(self, name, coach):
+    def addCoach(self, name, description):
         self.cursor = self.cnxn.cursor()
         try:
-            self.cursor.execute("INSERT INTO Coaches (Name, CoachID) VALUES ('"+name+"', '"+str(coach)+"'); COMMIT;")
+            self.cursor.execute("INSERT INTO Coaches (Name, Description) VALUES ('"+name+"', '"+description+"'); COMMIT;")
         except:
             return False
         else:

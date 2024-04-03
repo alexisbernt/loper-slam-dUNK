@@ -20,12 +20,12 @@ class MessagesCtoA:
         self.cursor.execute("SELECT * FROM MessagesCtoA where MessageID = '"+id+"'")
         return self.cursor
 
-    def addMessageCtoA(self, subject, description, coachId, teamId):
+    def addMessageCtoA(self, subject, description, coachId, athlete):
         self.cursor = self.cnxn.cursor()
         try:
             self.cursor.execute(
-                "INSERT INTO MessageCtoA (Subject, Description, CoachID, TeamID) VALUES "+
-                "('"+subject+"', '"+description+"', '"+str(coachId)+"', '"+str(teamId)+"'); COMMIT;"
+                "INSERT INTO MessageCtoA (Subject, Description, CoachID, AthleteID) VALUES "+
+                "('"+subject+"', '"+description+"', '"+str(coachId)+"', '"+str(athlete)+"'); COMMIT;"
             )
         except:
             return False

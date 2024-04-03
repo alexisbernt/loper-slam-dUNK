@@ -20,10 +20,10 @@ class TeamsController:
         self.cursor.execute("SELECT * FROM Teams where TeamID = '"+id+"'")
         return self.cursor
 
-    def addTeam(self, name, team):
+    def addTeam(self, name, description):
         self.cursor = self.cnxn.cursor()
         try:
-            self.cursor.execute("INSERT INTO Teams (Name, TeamID) VALUES ('"+name+"', '"+str(team)+"'); COMMIT;")
+            self.cursor.execute("INSERT INTO Teams (Name, Description) VALUES ('"+name+"', '"+description+"'); COMMIT;")
         except:
             return False
         else:
@@ -58,7 +58,8 @@ class TeamsController:
         else:
             return True
 
-
+#Note!: We might consider using a pivot table between teams and coaches (this would allow coaches to be part of multiple teams)
+# This is just a consideration for the future, but it would be a nice feature.
 
 
 
