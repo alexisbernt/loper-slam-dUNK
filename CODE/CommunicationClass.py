@@ -8,6 +8,9 @@ class Communication:
     def __init__(self):
         self.window = tk.Tk()
         self.on_screen = []
+        self.window.title("Communication")
+        self.window.geometry(f'{self.window.winfo_screenwidth() // 4}x{self.window.winfo_screenheight() // 3:.0f}')
+
 
     def reset_for_communicate(self):
         # Clear The Screen_________
@@ -18,6 +21,7 @@ class Communication:
         communication_title = Label(self.window, text="COMMUNICATE", font=("litera", 25), pady=10)
         self.on_screen.append(communication_title)
         communication_title.pack()
+
 
 # run_com_instance = Communication()
 # run_com_instance.reset_for_communicate()
