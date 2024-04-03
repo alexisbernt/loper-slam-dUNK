@@ -19,6 +19,5 @@ class Communication:
         self.on_screen.append(communication_title)
         communication_title.pack()
 
-
 # run_com_instance = Communication()
 # run_com_instance.reset_for_communicate()
