@@ -13,6 +13,22 @@ class RandomClass:
         self.window = tk.Tk()
         self.__name_list = []
         self.on_screen =[]
+    def add_name(self, root):  # add the name
+        def add_name_to_list():
+            # To list the names
+            name_list = tk.Listbox(root, selectmode=tk.SINGLE, height=10, width=30)
+            name_list.pack(pady=10)
+            name = name_entry.get()
+            if name:
+                name_list.insert(tk.END, name)
+                name_entry.delete(0, tk.END)
+        # To add names
+        name_entry = tk.Entry(root, width=30)  # entry widget for name input
+        name_entry.pack(pady=10)
+        add_button = tk.Button(root, text="ADD NAME", command=self.add_name)
+        add_button.pack()
+        spacing3 = tk.Label(root, text=" ")
+        return name_entry
     def reset_for_random(self):
         # Clear The Screen_________
         for item in self.on_screen:
@@ -22,6 +38,10 @@ class RandomClass:
         random_title = Label(self.window, text="RANDOM", font=("litera", 25), pady=10)
         self.on_screen.append(random_title)
         random_title.pack()
+        self.on_screen.append(RandomClass.add_name)
+        name_entry = self.add_name(self.window)  # store the name_entry widget
+        self.on_screen.append(name_entry)
+
     # def select_random_name(name_list):
     #     if name_list.size() > 0:
     #         random_name = random.choice(name_list.get(0, tk.END))
@@ -31,11 +51,7 @@ class RandomClass:
     #         print('Error. No names entered.')
     #
     #
-    # def add_name():  # add the name
-    #     name = name_entry.get()
-    #     if name:
-    #         name_list.insert(tk.END, name)
-    #         name_entry.delete(0, tk.END)
+
     #
     #
     # def clear_names():
@@ -82,16 +98,9 @@ class RandomClass:
     #
     # label = tk.Label(root, text="welcome to loper slam dUNK!", font=('Helvetica', 16), fg=('yellow'))
     # label.pack(pady=20)  # to change the text color of the label use the fg (foreground) option
-    # # To add names
-    # name_entry = tk.Entry(root, width=30)  # entry widget for name input
-    # name_entry.pack(pady=10)
-    # add_button = tk.Button(root, text="ADD NAME", command=add_name)
-    # add_button.pack()
-    # spacing3 = tk.Label(root, text=" ")
+
     # spacing3.pack(pady=0.5)
-    # # To list the names
-    # name_list = tk.Listbox(root, selectmode=tk.SINGLE, height=10, width=30)
-    # name_list.pack(pady=10)
+
     # # "Clear Names" button
     # clear_button = tk.Button(root, text="CLEAR NAMES ABOVE", command=clear_names)
     # clear_button.pack()

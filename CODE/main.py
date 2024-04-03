@@ -18,7 +18,6 @@ class SlamdUNK:
         # JUAN, PLEASE CONNECT YOUR BUTTON TO YOUR LIKING HERE :)
         self.calendar = Calendar(2024, 4)  # create instance of the class
         self.random = RandomClass()  # create instance of the class
-
         self.window.title("loper slam dUNK Version 1")
         self.window.geometry(f'{self.window.winfo_screenwidth() // 2}x{self.window.winfo_screenheight() // 1.5:.0f}')
         self.on_screen = []
@@ -60,6 +59,7 @@ class SlamdUNK:
     def clear_notes(self):
         self.notes.clear()
 
-
-run_instance = SlamdUNK()
-run_instance.window.mainloop()
+# Example usage
+slamdunk_instance = SlamdUNK()
+# slamdunk_instance.name_entry.pack_forget()  # hide the entry widget
+slamdunk_instance.window.mainloop()
