@@ -29,6 +29,11 @@ class RandomClass:
         add_button.pack()
         spacing3 = tk.Label(root, text=" ")
         return name_entry
+    def add_name_to_list(self):
+        name = self.name_entry.get()
+        if name:
+            self.name_list.insert(tk.END, name)
+            self.name_entry.delete(0, tk.END)
     def reset_for_random(self):
         # Clear The Screen_________
         for item in self.on_screen:
@@ -41,7 +46,12 @@ class RandomClass:
         self.on_screen.append(RandomClass.add_name)
         name_entry = self.add_name(self.window)  # store the name_entry widget
         self.on_screen.append(name_entry)
-
+        name_list = tk.Listbox(self.window, selectmode=tk.SINGLE, height=10, width=30)
+        name_list.pack(pady=10)
+        self.on_screen.append(name_list)
+        add_button = tk.Button(self.window, text='ADD NAME', command=self.add_name_to_list)
+        add_button.pack()
+        self.on_screen.append(add_button)
     # def select_random_name(name_list):
     #     if name_list.size() > 0:
     #         random_name = random.choice(name_list.get(0, tk.END))
