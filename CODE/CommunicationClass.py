@@ -8,6 +8,9 @@ class Communication:
     def __init__(self):
         self.window = tk.Tk()
         self.on_screen = []
+        self.window.title("Communication")
+        self.window.geometry(f'{self.window.winfo_screenwidth() // 4}x{self.window.winfo_screenheight() // 3:.0f}')
+
 
     def reset_for_communicate(self):
         # Clear The Screen_________
