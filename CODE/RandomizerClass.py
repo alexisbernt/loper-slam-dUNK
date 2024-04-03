@@ -6,34 +6,40 @@
 import tkinter as tk
 from tkinter import Label
 import random
+from functools import partial
+
+
 class RandomClass:
-# init method initializes if the coach wants to do a single selection
-# or select multiple members / group multiple members together from a team
+    # init method initializes if the coach wants to do a single selection
+    # or select multiple members / group multiple members together from a team
     def __init__(self):
         self.window = tk.Tk()
         self.__name_list = []
-        self.on_screen =[]
+        self.on_screen = []
+
     def add_name(self, root):  # add the name
-        def add_name_to_list():
-            # To list the names
-            name_list = tk.Listbox(root, selectmode=tk.SINGLE, height=10, width=30)
-            name_list.pack(pady=10)
-            name = name_entry.get()
-            if name:
-                name_list.insert(tk.END, name)
-                name_entry.delete(0, tk.END)
         # To add names
         name_entry = tk.Entry(root, width=30)  # entry widget for name input
         name_entry.pack(pady=10)
-        add_button = tk.Button(root, text="ADD NAME", command=self.add_name)
-        add_button.pack()
-        spacing3 = tk.Label(root, text=" ")
-        return name_entry
-    def add_name_to_list(self):
-        name = self.name_entry.get()
+        # To list the names
+        name_list = tk.Listbox(root, selectmode=tk.SINGLE, height=10, width=30)
+        name_list.pack(pady=10)
+        name = name_entry.get()
         if name:
-            self.name_list.insert(tk.END, name)
-            self.name_entry.delete(0, tk.END)
+            name_list.insert(tk.END, name)
+            name_entry.delete(0, tk.END)
+        # add_button = tk.Button(root, text="ADD NAME", command=self.add_name)
+        # add_button.pack()
+        # spacing3 = tk.Label(root, text=" ")
+        return name_entry, name_list
+
+
+    def add_name_to_list(self, root):
+        name_entry, name_list = self.add_name(self.window).get()
+        if name_entry:
+            name_list.insert(tk.END, name_entry)
+            name_entry.delete(0, tk.END)
+
     def reset_for_random(self):
         # Clear The Screen_________
         for item in self.on_screen:
@@ -49,7 +55,8 @@ class RandomClass:
         name_list = tk.Listbox(self.window, selectmode=tk.SINGLE, height=10, width=30)
         name_list.pack(pady=10)
         self.on_screen.append(name_list)
-        add_button = tk.Button(self.window, text='ADD NAME', command=self.add_name_to_list)
+        name_to_list_partial = partial(self.add_name_to_list, self.window)
+        add_button = tk.Button(self.window, text='ADD NAME', command=name_to_list_partial)
         add_button.pack()
         self.on_screen.append(add_button)
     # def select_random_name(name_list):
@@ -136,5 +143,5 @@ class RandomClass:
     # # Result variable
     # result_var = StringVar()
 
-RandomClass()
 
+RandomClass()
