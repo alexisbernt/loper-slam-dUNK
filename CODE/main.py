@@ -63,3 +63,8 @@ class SlamdUNK:
 slamdunk_instance = SlamdUNK()
 # slamdunk_instance.name_entry.pack_forget()  # hide the entry widget
 slamdunk_instance.window.mainloop()
+
+# Ideas to clear the screen (so we can put everything on the same screen)
+# Clear The Screen_________
+# for item in self.on_screen:
+#     item.pack_forget()

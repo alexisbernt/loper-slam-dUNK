@@ -21,29 +21,23 @@ class RandomClass:
         # To add names
         name_entry = tk.Entry(root, width=30)  # entry widget for name input
         name_entry.pack(pady=10)
-        # To list the names
-        name_list = tk.Listbox(root, selectmode=tk.SINGLE, height=10, width=30)
-        name_list.pack(pady=10)
-        name = name_entry.get()
-        if name:
-            name_list.insert(tk.END, name)
-            name_entry.delete(0, tk.END)
-        # add_button = tk.Button(root, text="ADD NAME", command=self.add_name)
-        # add_button.pack()
-        # spacing3 = tk.Label(root, text=" ")
-        return name_entry, name_list
+        return name_entry
 
-
-    def add_name_to_list(self, root):
-        name_entry, name_list = self.add_name(self.window).get()
+    def add_name_to_list(self, name_entry, name_list):
+        # name_entry, name_list = self.add_name(self.window)
         if name_entry:
-            name_list.insert(tk.END, name_entry)
+            name_list.insert(tk.END, name_entry.get())
             name_entry.delete(0, tk.END)
+
+    def select_random_name(self, names_from_list, selected_name_var=None):
+        if names_from_list.size() > 0:
+            random_name = random.choice(names_from_list.get(0, tk.END))
+            selected_name_var.set(f"Selected Name: {random_name}")
+        else:
+            selected_name_var.set(f"Error. No names entered.")
+            print('Error. No names entered.')
 
     def reset_for_random(self):
-        # Clear The Screen_________
-        for item in self.on_screen:
-            item.pack_forget()
         self.on_screen = []
         # Title____________________________________________________________
         random_title = Label(self.window, text="RANDOM", font=("litera", 25), pady=10)
@@ -53,19 +47,20 @@ class RandomClass:
         name_entry = self.add_name(self.window)  # store the name_entry widget
         self.on_screen.append(name_entry)
         name_list = tk.Listbox(self.window, selectmode=tk.SINGLE, height=10, width=30)
-        name_list.pack(pady=10)
-        self.on_screen.append(name_list)
-        name_to_list_partial = partial(self.add_name_to_list, self.window)
+        name_to_list_partial = partial(self.add_name_to_list, name_entry, name_list)
         add_button = tk.Button(self.window, text='ADD NAME', command=name_to_list_partial)
         add_button.pack()
         self.on_screen.append(add_button)
-    # def select_random_name(name_list):
-    #     if name_list.size() > 0:
-    #         random_name = random.choice(name_list.get(0, tk.END))
-    #         selected_name_var.set(f"Selected Name: {random_name}")
-    #     else:
-    #         selected_name_var.set(f"Error. No names entered.")
-    #         print('Error. No names entered.')
+        name_list.pack(pady=10)
+        self.on_screen.append(name_list)
+        name_to_random_partial = partial(self.select_random_name, name_list)
+        random_button = tk.Button(self.window, text="SELECT RANDOM NAME FROM ABOVE", command=name_to_random_partial)
+        random_button.pack()
+        self.on_screen.append(random_button)
+        selected_name_var = tk.StringVar()  # Create a label to display the selected random name
+        selected_name_label = tk.Label(self.window, textvariable=selected_name_var)
+        selected_name_label.pack()
+        self.on_screen.append(selected_name_label)
     #
     #
 
@@ -74,16 +69,7 @@ class RandomClass:
     # def clear_names():
     #     name_list.delete(0, tk.END)
     #
-    #
-    # def select_random_name():
-    #     if name_list.size() > 0:
-    #         random_name = random.choice(name_list.get(0, tk.END))
-    #         selected_name_var.set(f"Selected Name: {random_name}")
-    #     else:
-    #         selected_name_var.set(f"Error. No names entered.")
-    #         print('Error. No names entered.')
-    #
-    #
+
     # def names_library():
     #     # a function to store remember names that were entered in the past
     #     csv_file_path = "names.csv"
@@ -123,13 +109,7 @@ class RandomClass:
     # clear_button.pack()
     # spacing4 = tk.Label(root, text=" ")
     # spacing4.pack(pady=0.5)
-    # # "Select Random Name" button
-    # random_button = tk.Button(root, text="SELECT RANDOM NAME FROM ABOVE", command=select_random_name)
-    # random_button.pack()
-    # # Create a label to display the selected random name
-    # selected_name_var = tk.StringVar()
-    # selected_name_label = tk.Label(root, textvariable=selected_name_var)
-    # selected_name_label.pack()
+
     # # Remembering the list entered to store into names_library
     # remember_button = tk.Button(root, text="REMEMBER CURRENT LIST DISPLAYED", command=names_library)
     # remember_button.pack()
