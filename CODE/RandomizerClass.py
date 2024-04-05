@@ -30,6 +30,8 @@ class RandomClass:
             name_entry.delete(0, tk.END)
 
     def select_random_name(self, names_from_list, selected_name_var=None):
+        if selected_name_var is None:
+            selected_name_var = tk.StringVar()
         if names_from_list.size() > 0:
             random_name = random.choice(names_from_list.get(0, tk.END))
             selected_name_var.set(f"Selected Name: {random_name}")
