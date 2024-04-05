@@ -1,65 +1,65 @@
 # This will be the randomizer class
-# Alexis will begin coding the randomizer
-
-# This script currently does NOT run ... I am working on putting the functions from the
-# main.py script into a class in this .py script
 import tkinter as tk
-from tkinter import Label
+from tkinter import Label, messagebox
 import random
 from functools import partial
 
-
 class RandomClass:
-    # init method initializes if the coach wants to do a single selection
-    # or select multiple members / group multiple members together from a team
     def __init__(self):
         self.window = tk.Tk()
-        self.__name_list = []
         self.on_screen = []
 
-    def add_name(self, root):  # add the name
+    def add_name(self, root):
         # To add names
         name_entry = tk.Entry(root, width=30)  # entry widget for name input
         name_entry.pack(pady=10)
         return name_entry
 
     def add_name_to_list(self, name_entry, name_list):
+        # To add the name to a list that will be displayed on GUI
         # name_entry, name_list = self.add_name(self.window)
         if name_entry:
             name_list.insert(tk.END, name_entry.get())
             name_entry.delete(0, tk.END)
 
-    def select_random_name(self, names_from_list, selected_name_var=None):
-        if selected_name_var is None:
-            selected_name_var = tk.StringVar()
-        if names_from_list.size() > 0:
-            random_name = random.choice(names_from_list.get(0, tk.END))
+    def select_random_name(self, name_list, selected_name_var=None):
+        # Function to generate a random name that is entered into the listbox
+        selected_name_var = tk.StringVar()
+        if name_list.size() > 0:
+            random_name = random.choice(name_list.get(0, tk.END))
             selected_name_var.set(f"Selected Name: {random_name}")
+            tk.messagebox.showinfo("Selected Random Name", f"The randomly selected name is: {random_name}")
         else:
             selected_name_var.set(f"Error. No names entered.")
-            print('Error. No names entered.')
+            tk.messagebox.showinfo("Error Screen", "Error. Ensure names are entered")
 
     def reset_for_random(self):
+        # Resets the screen for functionality to happen
         self.on_screen = []
         # Title____________________________________________________________
         random_title = Label(self.window, text="RANDOM", font=("litera", 25), pady=10)
         self.on_screen.append(random_title)
         random_title.pack()
         self.on_screen.append(RandomClass.add_name)
-        name_entry = self.add_name(self.window)  # store the name_entry widget
+        name_entry = self.add_name(self.window)
         self.on_screen.append(name_entry)
         name_list = tk.Listbox(self.window, selectmode=tk.SINGLE, height=10, width=30)
         name_to_list_partial = partial(self.add_name_to_list, name_entry, name_list)
-        add_button = tk.Button(self.window, text='ADD NAME', command=name_to_list_partial)
+        # Researched lambda: In Python, lambda is a keyword used to create anonymous functions
+        add_button = tk.Button(self.window, text='ADD NAME',
+                               command=lambda: self.add_name_to_list(name_entry, name_list))
         add_button.pack()
         self.on_screen.append(add_button)
         name_list.pack(pady=10)
         self.on_screen.append(name_list)
-        name_to_random_partial = partial(self.select_random_name, name_list)
-        random_button = tk.Button(self.window, text="SELECT RANDOM NAME FROM ABOVE", command=name_to_random_partial)
+        name_to_random_partial = partial(self.select_random_name, name_to_list_partial)
+        # lambda is being used to create a function that calls self.add_name_to_list(name_entry, name_list) when the
+        # button is clicked
+        random_button = tk.Button(self.window, text="SELECT RANDOM NAME FROM ABOVE",
+                                  command=lambda: self.select_random_name(name_list))
         random_button.pack()
         self.on_screen.append(random_button)
-        selected_name_var = tk.StringVar()  # Create a label to display the selected random name
+        selected_name_var = tk.StringVar()
         selected_name_label = tk.Label(self.window, textvariable=selected_name_var)
         selected_name_label.pack()
         self.on_screen.append(selected_name_label)
