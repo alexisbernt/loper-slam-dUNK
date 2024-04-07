@@ -1,3 +1,5 @@
+# This code is executing SQL queries
+# designed to interact with database table named "Teams."
 class TeamsController:
     def __init__(self,cnxn):
         self.cnxn = cnxn
