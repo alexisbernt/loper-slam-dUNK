@@ -59,7 +59,7 @@ class Communication:
         self.on_screen.append(communication_title)
         communication_title.pack()
 
-        # Adds textbox to comm page, saves it to a list for now
+        # Adds textbox to comm page, sends it to the SQL server
         comm_textbox = tk.Entry(self.window, width=40)
         self.on_screen.append(comm_textbox)
         comm_textbox.pack()
