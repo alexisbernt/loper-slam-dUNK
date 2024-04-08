@@ -38,6 +38,12 @@ class ExampleClass:
 
         self.printContent()
 
+    def getCoachesTeams(self):
+        self.cursor = self.cnxn.cursor()
+        self.cursor.execute('SELECT * FROM CoachesTeams')
+
+        self.printContent()
+
     def getMessagesCtoT(self):
         self.cursor = self.cnxn.cursor()
         self.cursor.execute('SELECT * FROM MessagesCtoT')
@@ -102,7 +108,7 @@ class ExampleClass:
 
 
 example = ExampleClass()
-# example.addTeam("Team 1","We are team 1, because we already won!")
+# example.addTeam("Team 1","We are team 1")
 example.addAthlete("James Jamerson",10)
 
 
@@ -112,6 +118,8 @@ print("\n\nThis shows all the rows of the Teams table!:")
 example.getTeams()
 print("\n\nThis shows all the rows of the Coaches table!:")
 example.getCoaches()
+print("\n\nThis shows all the rows of the CoachesTeams table!:")
+example.getCoachesTeams()
 print("\n\nThis shows all the rows of the MessagesCtoT table!:")
 example.getMessagesCtoT()
 print("\n\nThis shows all the rows of the MessagesCtoA table!:")

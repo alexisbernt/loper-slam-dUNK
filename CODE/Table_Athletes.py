@@ -13,12 +13,12 @@ class AthletesController:
     def getAthletes(self):
         self.cursor = self.cnxn.cursor()
         self.cursor.execute('SELECT * FROM Athletes')
-        return self.cursor
+        return self.cursor.fetchall()
 
     def getAthlete(self, id):
         self.cursor = self.cnxn.cursor()
-        self.cursor.execute("SELECT * FROM Athletes where AthleteID = '"+id+"'")
-        return self.cursor
+        self.cursor.execute("SELECT * FROM Athletes where AthleteID = '"+str(id)+"'")
+        return self.cursor.fetchall()
 
     def addAthlete(self, name, team = None):
         self.cursor = self.cnxn.cursor()
@@ -33,7 +33,7 @@ class AthletesController:
     def removeAthlete(self, id):
         self.cursor = self.cnxn.cursor()
         try:
-            self.cursor.execute("DELETE FROM Athletes where AthleteID = '"+id+"'; COMMIT;")
+            self.cursor.execute("DELETE FROM Athletes where AthleteID = '"+str(id)+"'; COMMIT;")
         except:
             return False
         else:

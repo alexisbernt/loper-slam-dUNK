@@ -1,4 +1,4 @@
-class MessagesCtoT:
+class MessagesCtoTController:
     def __init__(self,cnxn):
         self.cnxn = cnxn
         self.cursor = self.cnxn.cursor()
@@ -13,18 +13,18 @@ class MessagesCtoT:
     def getMessagesCtoT(self):
         self.cursor = self.cnxn.cursor()
         self.cursor.execute('SELECT * FROM MessagesCtoT')
-        return self.cursor
+        return self.cursor.fetchall()
 
     def getMessageCtoT(self, id):
         self.cursor = self.cnxn.cursor()
-        self.cursor.execute("SELECT * FROM MessagesCtoT where MessageID = '"+id+"'")
-        return self.cursor
+        self.cursor.execute("SELECT * FROM MessagesCtoT where MessageID = '"+str(id)+"'")
+        return self.cursor.fetchall()
 
     def addMessageCtoT(self, subject, description, coach, team):
         self.cursor = self.cnxn.cursor()
         try:
             self.cursor.execute(
-                "INSERT INTO MessageCtoT (Subject, Description, CoachID, TeamID) VALUES "+
+                "INSERT INTO MessagesCtoT (Subject, Description, CoachID, TeamID) VALUES "+
                 "('"+subject+"', '"+description+"', '"+str(coach)+"', '"+str(team)+"'); COMMIT;"
             )
         except:
@@ -34,7 +34,7 @@ class MessagesCtoT:
     def removeMessageCtoT(self, id):
         self.cursor = self.cnxn.cursor()
         try:
-            self.cursor.execute("DELETE FROM MessagesCtoT where MessageID = '"+id+"'; COMMIT;")
+            self.cursor.execute("DELETE FROM MessagesCtoT where MessageID = '"+str(id)+"'; COMMIT;")
         except:
             return False
         else:

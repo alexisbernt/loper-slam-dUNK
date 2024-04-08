@@ -15,30 +15,54 @@ class TeamsController:
     def getTeams(self):
         self.cursor = self.cnxn.cursor()
         self.cursor.execute('SELECT * FROM Teams')
-        return self.cursor
+        return self.cursor.fetchall()
 
     def getTeam(self, id):
         self.cursor = self.cnxn.cursor()
-        self.cursor.execute("SELECT * FROM Teams where TeamID = '"+id+"'")
-        return self.cursor
+        self.cursor.execute("SELECT * FROM Teams where TeamID = '"+str(id)+"'")
+        return self.cursor.fetchall()
 
     def addTeam(self, name, description):
         self.cursor = self.cnxn.cursor()
         try:
-            self.cursor.execute("INSERT INTO Teams (Name, Description) VALUES ('"+name+"', '"+description+"'); COMMIT;")
+            self.cursor.execute("INSERT INTO Teams (Name, Description) VALUES ('"+str(name)+"', '"+str(description)+"'); COMMIT;")
         except:
             return False
         else:
             return True
+
     def removeTeam(self, id):
         self.cursor = self.cnxn.cursor()
         try:
-            self.cursor.execute("DELETE FROM Teams where TeamID = '"+id+"'; COMMIT;")
+            self.cursor.execute("DELETE FROM Teams where TeamID = '"+str(id)+"'; COMMIT;")
         except:
             return False
         else:
             return True
-        
+
+    def attachCoach(self, team, coach):
+        self.cursor = self.cnxn.cursor()
+        try:
+            self.cursor.execute("INSERT INTO CoachesTeams (CoachID, TeamID) VALUES ('"+str(coach)+"', '"+str(team)+"'); COMMIT;")
+        except:
+            return False
+        else:
+            return True
+
+    def detachCoach(self, team, coach):
+        self.cursor = self.cnxn.cursor()
+        try:
+            self.cursor.execute("DELETE FROM CoachesTeams where CoachID = '"+str(coach)+"' and TeamID = '"+str(team)+"'; COMMIT;")
+        except:
+            return False
+        else:
+            return True
+
+    def getCoaches(self, team):
+        self.cursor = self.cnxn.cursor()
+        self.cursor.execute("SELECT * FROM CoachesTeams where TeamID = '"+str(team)+"'")
+        return self.cursor.fetchall()
+
     def updateTeam(self, id, colNames = [], colVals = []):
         if len(colNames) != len(colVals):
             return "Column name / value mismatch. Ensure same # of values for both!"
@@ -59,9 +83,6 @@ class TeamsController:
             return False
         else:
             return True
-
-#Note!: We might consider using a pivot table between teams and coaches (this would allow coaches to be part of multiple teams)
-# This is just a consideration for the future, but it would be a nice feature.
 
 
 

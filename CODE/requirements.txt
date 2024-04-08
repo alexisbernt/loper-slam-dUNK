@@ -7,3 +7,4 @@ SQLAlchemy
 passlib
 pbr
 talons
+ttkbootstrap

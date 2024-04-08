@@ -13,29 +13,53 @@ class CoachesController:
     def getCoaches(self):
         self.cursor = self.cnxn.cursor()
         self.cursor.execute('SELECT * FROM Coaches')
-        return self.cursor
+        return self.cursor.fetchall()
 
     def getCoach(self, id):
         self.cursor = self.cnxn.cursor()
-        self.cursor.execute("SELECT * FROM Coach where CoachID = '"+id+"'")
-        return self.cursor
+        self.cursor.execute("SELECT * FROM Coaches where CoachID = '"+str(id)+"'")
+        return self.cursor.fetchall()
 
     def addCoach(self, name, description):
         self.cursor = self.cnxn.cursor()
         try:
-            self.cursor.execute("INSERT INTO Coaches (Name, Description) VALUES ('"+name+"', '"+description+"'); COMMIT;")
+            self.cursor.execute("INSERT INTO Coaches (Name, Description) VALUES ('"+str(name)+"', '"+str(description)+"'); COMMIT;")
         except:
             return False
         else:
             return True
+
     def removeCoach(self, id):
         self.cursor = self.cnxn.cursor()
         try:
-            self.cursor.execute("DELETE FROM Coaches where CoachID = '"+id+"'; COMMIT;")
+            self.cursor.execute("DELETE FROM Coaches where CoachID = '"+str(id)+"'; COMMIT;")
         except:
             return False
         else:
             return True
+        
+    def attachTeam(self, coach, team):
+        self.cursor = self.cnxn.cursor()
+        try:
+            self.cursor.execute("INSERT INTO CoachesTeams (CoachID, TeamID) VALUES ('"+str(coach)+"', '"+str(team)+"'); COMMIT;")
+        except:
+            return False
+        else:
+            return True
+
+    def detachTeam(self, coach, team):
+        self.cursor = self.cnxn.cursor()
+        try:
+            self.cursor.execute("DELETE FROM CoachesTeams where CoachID = '"+str(coach)+"' and TeamID = '"+str(team)+"'; COMMIT;")
+        except:
+            return False
+        else:
+            return True
+    
+    def getTeams(self, coach):
+        self.cursor = self.cnxn.cursor()
+        self.cursor.execute("SELECT * FROM CoachesTeams where CoachID = '"+str(coach)+"'")
+        return self.cursor.fetchall()
         
     def updateCoach(self, id, colNames = [], colVals = []):
         if len(colNames) != len(colVals):

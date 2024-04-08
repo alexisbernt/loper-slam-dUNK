@@ -1,4 +1,4 @@
-class MessagesCtoA:
+class MessagesCtoAController:
     def __init__(self,cnxn):
         self.cnxn = cnxn
         self.cursor = self.cnxn.cursor()
@@ -13,12 +13,12 @@ class MessagesCtoA:
     def getMessagesCtoA(self):
         self.cursor = self.cnxn.cursor()
         self.cursor.execute('SELECT * FROM MessagesCtoA')
-        return self.cursor
+        return self.cursor.fetchall()
 
     def getMessageCtoA(self, id):
         self.cursor = self.cnxn.cursor()
-        self.cursor.execute("SELECT * FROM MessagesCtoA where MessageID = '"+id+"'")
-        return self.cursor
+        self.cursor.execute("SELECT * FROM MessagesCtoA where MessageID = '"+str(id)+"'")
+        return self.cursor.fetchall()
 
     def addMessageCtoA(self, subject, description, coachId, athlete):
         self.cursor = self.cnxn.cursor()
@@ -34,7 +34,7 @@ class MessagesCtoA:
     def removeMessageCtoA(self, id):
         self.cursor = self.cnxn.cursor()
         try:
-            self.cursor.execute("DELETE FROM MessagesCtoA where MessageID = '"+id+"'; COMMIT;")
+            self.cursor.execute("DELETE FROM MessagesCtoA where MessageID = '"+str(id)+"'; COMMIT;")
         except:
             return False
         else:
