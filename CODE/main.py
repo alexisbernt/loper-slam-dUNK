@@ -66,7 +66,7 @@ class SlamdUNK:
         events = EventsController()
         month_events = events.getMonthEvents(3, 2004)  # Change the year and month as needed
     
-            self.calendar.addMultipleEvents(month_events)
+        self.calendar.addMultipleEvents(month_events)
 
 # Example usage
 slamdunk_instance = SlamdUNK()
