@@ -49,6 +49,25 @@ class ExampleClass:
         self.cursor.execute('SELECT * FROM MessagesCtoA')
 
         self.printContent()
+    
+    def getAdmins(self):
+        self.cursor = self.cnxn.cursor()
+        self.cursor.execute('SELECT * FROM Admins')
+
+        self.printContent()
+
+    def getUsers(self):
+        self.cursor = self.cnxn.cursor()
+        self.cursor.execute('SELECT * FROM Users')
+
+        self.printContent()
+    
+    def getSignatures(self):
+        self.cursor = self.cnxn.cursor()
+        self.cursor.execute('SELECT * FROM Signatures')
+
+        self.printContent()
+
 
     def printContent(self):
         # Go through each row in the currently selected data and print it out.
@@ -83,8 +102,8 @@ class ExampleClass:
 
 
 example = ExampleClass()
-example.addTeam("Team 1","We are team 1, because we already won!")
-example.addAthlete("James Jamerson",1)
+# example.addTeam("Team 1","We are team 1, because we already won!")
+example.addAthlete("James Jamerson",10)
 
 
 print("This shows all the rows of the Athletes table!:")
@@ -97,6 +116,13 @@ print("\n\nThis shows all the rows of the MessagesCtoT table!:")
 example.getMessagesCtoT()
 print("\n\nThis shows all the rows of the MessagesCtoA table!:")
 example.getMessagesCtoA()
+
+print("\n\nThis shows all the rows of the Admins table!:")
+example.getAdmins()
+print("\n\nThis shows all the rows of the Users table!:")
+example.getUsers()
+print("\n\nThis shows all the rows of the Signatures table!:")
+example.getSignatures()
 
 
 

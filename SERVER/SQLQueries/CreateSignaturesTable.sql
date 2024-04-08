@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS [dbo].Signatures
 if not EXISTS(select * from sys.tables t join sys.schemas s on (t.schema_id = s.schema_id) where s.name = 'dbo' and t.name = 'Signatures')
 BEGIN
 CREATE TABLE [dbo].[Signatures](
-		PrimaryKey int IDENTITY(1,1) NOT NULL,
+		[PrimaryKey] [nvarchar](255) NOT NULL,
 		InstallCount int NOT NULL,
 		InstallLimit int NOT NULL,
 		UnlimitedInstalls BIT NOT NULL,

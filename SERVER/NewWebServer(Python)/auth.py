@@ -17,21 +17,34 @@ def authenticate(req):
         return False
 
     authrequest = standard_b64decode(req.auth.split(" ")[1]).split(b":")
+    print(authrequest)
     username = authrequest[0]
 
     if username is None:
         return False
+    # print("username...: "+username)
+    exampleAdmins = session.query(AdminsTable).first()
 
+    # list out properties of admins...
+    for property, value in vars(exampleAdmins).items():
+        print(property, ":", value)
+    print("separator...")
+    print("username: ")
+    print(username.decode("utf-8"))
+    # username = "newAdmin" #trying to get something to work here....
     stored_user = session.query(AdminsTable).get(username)
-    
+    print("stored user: ")
+    print(stored_user)
     if stored_user is not None:
+        print("found user?")
         stored_key = stored_user.Key.split("#")[0]
         salt = stored_user.Key.split("#")[1]
 
         key = authrequest[1].decode("utf-8") + salt
         key = key.encode("utf-8")
         key = sha256(key).hexdigest()
-
+        print("key: "+key)
+        print("stored_key: "+stored_key)
         return key == stored_key
     
     return False
