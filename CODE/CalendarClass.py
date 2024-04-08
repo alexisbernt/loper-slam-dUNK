@@ -1,5 +1,10 @@
 import calendar
+from tkinter import simpledialog
+
 import matplotlib.pyplot as plt
+import tkinter as tk
+from Table_Events import EventsController
+
 
 w_days = 'Sun Mon Tue Wed Thu Fri Sat'.split()
 m_names = 'January February March April May June July August September October November December'.split()
@@ -13,6 +18,7 @@ class Calendar:
         self._year = year
         self._month = month
         self.cal = calendar.monthcalendar(year, month)
+        self.eventsController = EventsController()
 
         self.events = [[[] for day in week] for week in self.cal]
 
@@ -62,9 +68,42 @@ class Calendar:
         # Adds the month and year titles
         f.suptitle(m_names[self._month - 1] + ' ' + str(self._year),
                    fontsize=20, fontweight='bold')
+
+        #currentEvents = self.eventsController.getMonthEvents(self._month, self._year)
+        #self.addMultipleEvents(currentEvents)
+
+        home_button = tk.Button(master=f.canvas.toolbar, text="addEvent", command=self.promptEvent)
+        home_button.pack(side=tk.LEFT, padx=10)
+
         plt.show()
+
 
     # Function takes a string(event) and ensure that the date exist and adds to calendar
     def addEvent(self, day, event):
         week, w_day = self.dayIndex(day)
         self.events[week][w_day].append(event)
+        plt.close()
+        self.show()
+
+    def addMultipleEvents(self, eventList):
+        for event in eventList:
+            name = event[0]
+            date = event[1]
+            day = date.split('/')[1]
+            if day.startswith('0'):
+                day = day[1]
+
+            week, w_day = self.dayIndex(int(day))
+            self.events[week][w_day].append(name)
+
+
+    def promptEvent(self):
+        name = simpledialog.askstring("Input", "Enter Event Name: ")
+        day = int(simpledialog.askstring("Input", "Enter Day: "))
+        self.addEvent(day, name)
+
+    def forward_call(self, *args, **kwargs):
+        print("forward call")
+
+    def backward_call(self, *args, **kwargs):
+        print("backward call")
