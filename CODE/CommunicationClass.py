@@ -77,30 +77,30 @@ class Communication:
                 teamController = TeamsController(cnxn=self.cnxn)
                 msgController = MessagesCtoTController(cnxn=self.cnxn)
                 
-                #- If there are no coaches, create one.
+                # - If there are no coaches, create one.
                 coaches = coachController.getCoaches()
                 if not coaches:
                     coachController.addCoach("First Coach", "Example description")
 
                 CoachID = coachController.getCoaches()[0][0]
                 print(CoachID)
-                #- If there are no teams, create one.
+                # - If there are no teams, create one.
                 teams = teamController.getTeams()
                 if not teams:
                     teamController.addTeam("First Team", "Example description")
 
                 TeamID = teamController.getTeams()[0][0]
                 print(TeamID)
-                #- If there is no connection between the first coach and the first team, create one.
+                # - If there is no connection between the first coach and the first team, create one.
                 teams = coachController.getTeams(CoachID)
                 if not teams:
-                    coachController.attachTeam(CoachID, TeamID) #change this value to something that works for you...
+                    coachController.attachTeam(CoachID, TeamID) # change this value to something that works for you...
 
-                #---
+                # ---
                 
                 # Teams = coachController.getTeams(CoachID)
                 # if Teams:
-                #     TeamID = coachController.getTeams(CoachID)[0] # will give an error if you don't have entry in CoachesTeams pivot table...
+                # TeamID = coachController.getTeams(CoachID)[0] # will give an error if you don't have entry in CoachesTeams pivot table...
                 # print("Team ID is:")
                 # print(TeamID)
 
