@@ -25,6 +25,8 @@ class Communication:
         self.userId = 1                     # ID 1 being the first ID in the coach table
         #---
         #--- Stuff for connecting with the SQL Server
+        # change settings to my own
+        # change to try to get to work with .env file
         driverStr = os.environ.get('DRIVER') or "{SQL Server}"
         serverStr = os.environ.get('SERVER') or "LAPTOP-3JNM76RU"
         databaseStr = os.environ.get('DATABASE') or "LoperSlamdUNKDB"

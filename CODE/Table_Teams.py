@@ -24,12 +24,12 @@ class TeamsController:
 
     def addTeam(self, name, description):
         self.cursor = self.cnxn.cursor()
-        try:
-            self.cursor.execute("INSERT INTO Teams (Name, Description) VALUES ('"+str(name)+"', '"+str(description)+"'); COMMIT;")
-        except:
-            return False
-        else:
-            return True
+        # try:
+        self.cursor.execute("INSERT INTO Teams (Name, Description) VALUES ('"+str(name)+"', '"+str(description)+"'); COMMIT;")
+        # except:
+        #     return False
+        # else:
+        #     return True
 
     def removeTeam(self, id):
         self.cursor = self.cnxn.cursor()

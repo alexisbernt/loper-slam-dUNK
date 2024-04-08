@@ -11,13 +11,13 @@ cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER=BERNTTOAST;Database=loperslamd
 teams_controller = TeamsController(cnxn)
 
 # Call the addTeam method to insert a new team / the roster
-title_name = "UNK Women's Basketball"
+title_name = "UNK Womens Basketball" # Uses apostrophe in SQL so that closes it out
 roster = "Riley Jensen, Kia Wilson, Jordan Sears, Brinly Christensen, Macy Bryant"
 success = teams_controller.addTeam(title_name, roster)
 
 # print to terminal if the insertion was successful
-if success:
-    print("Team added successfully.")
-else:
-    print("Failed to add team.")
+# if success:
+#     print("Team added successfully.")
+# else:
+#     print("Failed to add team.")
 
