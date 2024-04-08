@@ -16,7 +16,8 @@ class SlamdUNK:
         self.window = tk.Tk()
         self.communication = Communication()  # create instance of the class
         # JUAN, PLEASE CONNECT YOUR BUTTON TO YOUR LIKING HERE :)
-        self.calendar = Calendar(2024, 4)  # create instance of the class
+        currentDate = date.today()
+        self.calendar = Calendar(2004, 3)
         self.random = RandomClass()  # create instance of the class
         self.window.title("loper slam dUNK Version 1")
         self.window.geometry(f'{self.window.winfo_screenwidth() // 2}x{self.window.winfo_screenheight() // 1.5:.0f}')
@@ -26,6 +27,8 @@ class SlamdUNK:
         self.style = Style(theme="litera")  # creating ttkbootstrap style with the specified theme
         self.style.theme_use('litera')
         self.dashboard_screen()  # Call dashboard_screen method
+        self.addCalendarEvents()
+
 
     def dashboard_screen(self):
         # Clear The Screen_________
@@ -58,6 +61,12 @@ class SlamdUNK:
 
     def clear_notes(self):
         self.notes.clear()
+
+    def addCalendarEvents(self):
+        events = EventsController()
+        month_events = events.getMonthEvents(3, 2004)  # Change the year and month as needed
+    
+        self.calendar.addMultipleEvents(month_events)
 
 # Example usage
 slamdunk_instance = SlamdUNK()
