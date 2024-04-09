@@ -1,9 +1,6 @@
-# This is where the dashboard will be
-
-# Will implement a GUI
 import tkinter as tk
 from datetime import date
-
+from functools import partial
 from ttkbootstrap import Style
 from tkinter import Label, Button
 # Will import the classes to connect to the GUI
@@ -28,8 +25,9 @@ class SlamdUNK:
 
     # Clear The Screen Functionalities
     def clear_screen(self):
-        for widget in self.notes:
+        for widget in self.on_screen:
             widget.destroy()
+
     def clear_notes(self):
         for widget in self.notes:
             widget.destroy()
@@ -39,7 +37,7 @@ class SlamdUNK:
     def sign_in_screen(self):
         self.clear_screen()
         self.clear_notes()
-        sign_in_page_title = Label(self.window, text="Welcome to loperslamdUNK", font=("Ariel",28), pady=10)
+        sign_in_page_title = Label(self.window, text="Welcome to loperslamdUNK!", font=("Ariel", 28), pady=10)
         self.on_screen.append(sign_in_page_title)
         sign_in_page_title.pack()
         # FOR USERS TO SIGN IN
@@ -56,17 +54,29 @@ class SlamdUNK:
         self.on_screen.append(password_entry)
         password_entry.pack()
         login_button = Button(self.window, text="Login", font=("Ariel", 15),
-                                command=lambda: self.login(username_entry.get(), password_entry.get()))
+                              command=lambda: self.login(username_entry.get(), password_entry.get()))
         self.on_screen.append(login_button)
         login_button.pack()
 
-    def login(self,username, password):
+    def login(self, username, password):
         # Right now going straight to dashboard screen
         # Instead hook it up, so it checks to see if username and password
         # are valid (in database). If so, login, else error.
+        # LOGIC ----------------------------
+        # if name = valid:
         self.dashboard_screen()
+        # else:
+        # messagebox error
 
     def dashboard_screen(self):
+        # RIGHT NOW I HAVE COMMENTED COMMUNICATION CLASS OUT ----------------------------
+        # I have commented out some classes that are connected to the SQL database
+        # That functionality still needs to be implemented/connected
+        # self.communication = Communication()  # create instance of the class
+        # RIGHT NOW I HAVE COMMENTED CALENDAR CLASS OUT ----------------------------
+        # currentDate = date.today()
+        # self.calendar = Calendar(2004, 3) # create instance of the class
+        self.random = RandomClass()  # create instance of the class
         # Clear The Screen all over again
         self.clear_screen()
         self.clear_notes()
@@ -77,35 +87,59 @@ class SlamdUNK:
         # You can use the command: command=lambda: self.[call class].[call function]() to connect the button
         # Buttons for navigating to different pages w/n the application
         communication_button = Button(self.window, text="COMMUNICATE", font=("Ariel", 15),
-                                command=lambda: self.communication.reset_for_communicate())
+                                      command=lambda: self.communication.reset_for_communicate())
         self.on_screen.append(communication_button)
         communication_button.pack()
         random_button = Button(self.window, text="RANDOM", font=("Ariel", 15),
-                                      command=lambda: self.random.reset_for_random())
+                               command=lambda: self.run_random())
         self.on_screen.append(random_button)
         random_button.pack()
-        calendar_button = Button(self.window, text="CALENDAR", font=("Ariel", 15), command= lambda: self.calendar.show())
+        calendar_button = Button(self.window, text="CALENDAR", font=("Ariel", 15), command=lambda: self.calendar.show())
         self.on_screen.append(calendar_button)
         calendar_button.pack()
 
-    # self.communication = Communication()  # create instance of the class
-    # # JUAN, PLEASE CONNECT YOUR BUTTON TO YOUR LIKING HERE :)
-    # currentDate = date.today()
-    # self.calendar = Calendar(2004, 3)
-    # self.random = RandomClass()  # create instance of the class
-    # # self.open_screen()
-    # self.style = Style(theme="litera")  # creating ttkbootstrap style with the specified theme
-    # self.style.theme_use('litera')
-    # self.dashboard_screen()  # Call dashboard_screen method
-    # self.addCalendarEvents()
+    # WE NEED A BACK BUTTON STILL 
+    def back_button(self):
+        pass
 
     def addCalendarEvents(self):
         events = EventsController()
         month_events = events.getMonthEvents(3, 2004)  # Change the year and month as needed
-    
+
         self.calendar.addMultipleEvents(month_events)
 
-# Example usage
+    # MUST CREATE THE FUNCTIONS WITH THE BUTTONS WITHIN THIS SCRIPT ------------
+    # I just copied my "reset for random code" from my randomizer class and pasted it in a new function on main.py
+    def run_random(self):
+        # Resets the screen for functionality to happen
+        self.clear_screen()
+        self.clear_notes()
+        # Title____________________________________________________________
+        random_title = Label(self.window, text="RANDOM", font=("litera", 25), pady=10)
+        self.on_screen.append(random_title)
+        random_title.pack()
+        self.on_screen.append(RandomClass.add_name)
+        name_entry = self.random.add_name(self.window)
+        self.on_screen.append(name_entry)
+        name_list = tk.Listbox(self.window, selectmode=tk.SINGLE, height=10, width=30)
+        name_to_list_partial = partial(self.random.add_name_to_list, name_entry, name_list)
+        # Researched lambda: In Python, lambda is a keyword used to create anonymous functions
+        add_button = tk.Button(self.window, text='ADD NAME',
+                               command=lambda: self.random.add_name_to_list(name_entry, name_list))
+        add_button.pack()
+        self.on_screen.append(add_button)
+        name_list.pack(pady=10)
+        self.on_screen.append(name_list)
+        name_to_random_partial = partial(self.random.select_random_name, name_to_list_partial)
+        # lambda is being used to create a function that calls self.add_name_to_list(name_entry, name_list) when the
+        # button is clicked
+        random_button = tk.Button(self.window, text="SELECT RANDOM NAME FROM ABOVE",
+                                  command=lambda: self.random.select_random_name(name_list))
+        random_button.pack()
+        self.on_screen.append(random_button)
+        selected_name_var = tk.StringVar()
+        selected_name_label = tk.Label(self.window, textvariable=selected_name_var)
+        selected_name_label.pack()
+        self.on_screen.append(selected_name_label)
+
 slamdunk_instance = SlamdUNK()
-# slamdunk_instance.name_entry.pack_forget()  # hide the entry widget
-# slamdunk_instance.window.mainloop()
