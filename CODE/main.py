@@ -100,7 +100,14 @@ class SlamdUNK:
 
     # WE NEED A BACK BUTTON STILL 
     def back_button(self):
-        pass
+        button_back = tk.Button(self.window, text="Back", font=("Ariel", 15), command=self.go_back)
+        self.on_screen.append(button_back)
+        button_back.pack()
+
+    def go_back(self):
+        self.clear_screen()
+        self.clear_notes()
+        self.dashboard_screen()
 
     def addCalendarEvents(self):
         events = EventsController()
@@ -118,7 +125,8 @@ class SlamdUNK:
         random_title = Label(self.window, text="RANDOM", font=("litera", 25), pady=10)
         self.on_screen.append(random_title)
         random_title.pack()
-        self.on_screen.append(RandomClass.add_name)
+        # --- Commented this out, it was causing errors with clear screen and doesn't appear to do anything
+        # self.on_screen.append(RandomClass.add_name)
         name_entry = self.random.add_name(self.window)
         self.on_screen.append(name_entry)
         name_list = tk.Listbox(self.window, selectmode=tk.SINGLE, height=10, width=30)
@@ -141,5 +149,7 @@ class SlamdUNK:
         selected_name_label = tk.Label(self.window, textvariable=selected_name_var)
         selected_name_label.pack()
         self.on_screen.append(selected_name_label)
+        self.back_button()
+
 
 slamdunk_instance = SlamdUNK()
