@@ -2,14 +2,22 @@
 
 # Will implement a GUI
 import tkinter as tk
+from datetime import date
+
 from ttkbootstrap import Style
 from tkinter import Label, Button
 # Will import the classes to connect to the GUI
 from RandomizerClass import RandomClass
 from CommunicationClass import Communication
 from CalendarClass import Calendar
-# In the classes, we should have the functionality implemented
 
+# Ideas to clear the screen (so we can put everything on the same screen)
+# def __init__(self):
+#     self.window = tk.Tk()
+#     self.on_screen = []
+# Clear The Screen_________
+# for item in self.on_screen:
+#     item.pack_forget()
 
 class SlamdUNK:
     def __init__(self):
@@ -72,8 +80,3 @@ class SlamdUNK:
 slamdunk_instance = SlamdUNK()
 # slamdunk_instance.name_entry.pack_forget()  # hide the entry widget
 slamdunk_instance.window.mainloop()
-
-# Ideas to clear the screen (so we can put everything on the same screen)
-# Clear The Screen_________
-# for item in self.on_screen:
-#     item.pack_forget()

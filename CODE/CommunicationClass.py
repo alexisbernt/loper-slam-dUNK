@@ -28,8 +28,8 @@ class Communication:
         # change settings to my own
         # change to try to get to work with .env file
         driverStr = os.environ.get('DRIVER') or "{SQL Server}"
-        serverStr = os.environ.get('SERVER') or "LAPTOP-3JNM76RU"
-        databaseStr = os.environ.get('DATABASE') or "LoperSlamdUNKDB"
+        serverStr = os.environ.get('SERVER') or "BERNTTOAST"
+        databaseStr = os.environ.get('DATABASE') or "loperslamdUNK"
         trustedConStr = os.environ.get('TRUSTED_CONNECTION') or "yes"
         print("Driver="+driverStr+";")
         print("Server="+serverStr+";")
