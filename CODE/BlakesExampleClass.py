@@ -1,3 +1,4 @@
+from base64 import b64encode
 import pyodbc
 class ExampleClass:
     def __init__(self):
@@ -82,18 +83,33 @@ class ExampleClass:
             print('row = %r' % (row,))
 
 
-    def addAthlete(self, name, team):
-        self.cursor = self.cnxn.cursor() #now I'm thinking we should have a one to many relationship for Athletes to Teams instead of just a foreign key... oh well
-        self.cursor.execute("INSERT INTO Athletes (Name, TeamID) VALUES ('"+name+"', '"+str(team)+"'); COMMIT;")
+    def addAthlete(self, name, username, password, team = None):
+        token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
+
+        self.cursor = self.cnxn.cursor()
+        intoStr = "(Name, Username, Password, TeamID); COMMIT;"
+        valuesStr = "VALUES ('"+name+", '"+str(username)+", '"+str(token)+", '"+str(team or "")+"'); COMMIT;"
+        try:
+            self.cursor.execute("INSERT INTO Athletes "+intoStr+" VALUES "+valuesStr+"; COMMIT;")
+        except:
+            return False
+        else:
+            return True
 
     def addTeam(self, name, desc): #ensure name and desc variables have no special characters in them... Otherwise injection might be possible.
         self.cursor = self.cnxn.cursor()
         self.cursor.execute("INSERT INTO Teams (Name, Description) VALUES ('"+name+"', '"+desc+"'); COMMIT;")
 
-    def addCoach(self): #CHANGE BEHAVIOR
+    def addCoach(self, name, description, username, password):
         self.cursor = self.cnxn.cursor()
-        self.cursor.execute('SELECT * FROM Coaches')
-        self.printContent()
+        # We use a token that uses both the username and password so it's harder for an attacker to decode the password.
+        token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
+        try:
+            self.cursor.execute("INSERT INTO Coaches (Name, Description, Username, Password) VALUES ('"+str(name)+"', '"+str(description)+"', '"+str(username)+"', '"+str(token)+"'); COMMIT;")
+        except:
+            return False
+        else:
+            return True
 
     def addMessageCtoT(self): #CHANGE BEHAVIOR
         self.cursor = self.cnxn.cursor()
@@ -109,7 +125,7 @@ class ExampleClass:
 
 example = ExampleClass()
 # example.addTeam("Team 1","We are team 1")
-example.addAthlete("James Jamerson",10)
+# example.addCoach("Coachy McCoacherson","coachman92","coachpass123",10)
 
 
 print("This shows all the rows of the Athletes table!:")

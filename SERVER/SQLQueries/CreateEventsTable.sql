@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[Events](
 		[Date] [nvarchar](255) NOT NULL,
 		TeamID INT,
 		PRIMARY KEY (EventID),
-		FOREIGN KEY (TeamID) REFERENCES dbo.teams(TeamID),
+		FOREIGN KEY (TeamID) REFERENCES dbo.teams(TeamID) ON DELETE CASCADE,
 	) ON [PRIMARY]
 END
 GO

@@ -16,11 +16,12 @@ calendar.setfirstweekday(6)
 
 # Calendar class is used to generate and display monthly calendars with events
 class Calendar:
-    def __init__(self, year, month):
+    def __init__(self, year, month, cnxn):
         self._year = year
         self._month = month
+        self.cnxn = cnxn
         self.cal = calendar.monthcalendar(year, month)
-        self.eventsController = EventsController()
+        self.eventsController = EventsController(cnxn)
 
         self.events = [[[] for day in week] for week in self.cal]
 

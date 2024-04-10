@@ -12,6 +12,8 @@ BEGIN
 CREATE TABLE [dbo].[CoachesTeams](
 		[CoachID] int NOT NULL,
 		[TeamID] int NOT NULL,
+		FOREIGN KEY (CoachID) REFERENCES dbo.Coaches(CoachID) ON DELETE CASCADE,
+		FOREIGN KEY (TeamID) REFERENCES dbo.Teams(TeamID) ON DELETE CASCADE,
 		PRIMARY KEY (CoachID, TeamID),
 	) ON [PRIMARY]
 END

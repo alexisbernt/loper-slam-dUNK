@@ -72,11 +72,11 @@ class SlamdUNK:
         password_label = Label(self.window, text="Enter password", font=("Ariel", 18))
         self.on_screen.append(password_label)
         password_label.pack()
-
-
-        password_entry = tk.Entry(self.window)
+        password_entry = tk.Entry(self.window, show="*")
         self.on_screen.append(password_entry)
         password_entry.pack()
+
+
         login_button = Button(self.window, text="Login", font=("Ariel", 15),
                               command=lambda: self.login(username_entry.get(), password_entry.get()))
         self.on_screen.append(login_button)
@@ -115,7 +115,7 @@ class SlamdUNK:
         # self.communication = Communication()  # create instance of the class
         # RIGHT NOW I HAVE COMMENTED CALENDAR CLASS OUT ----------------------------
         currentDate = date.today()
-        self.calendar = Calendar(currentDate.year, currentDate.month)        # create instance of the class
+        self.calendar = Calendar(currentDate.year, currentDate.month,self.communication.cnxn)        # create instance of the class
         self.random = RandomClass()  # create instance of the class
         # Clear The Screen all over again
         self.clear_screen()
@@ -150,7 +150,7 @@ class SlamdUNK:
         self.dashboard_screen()
 
     def addCalendarEvents(self):
-        events = EventsController()
+        events = EventsController(self.communication.cnxn)
         currentDate = date.today()
         month_events = events.getMonthEvents(currentDate.month, currentDate.year)  # Change the year and month as needed
 

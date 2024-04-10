@@ -21,7 +21,7 @@ CREATE TABLE [dbo].[Users](
 		InstallDateTime DATETIME NOT NULL,
 		-- PRIMARY KEY ([Signature]), -- this is what they use in their made_db.py file... Not sure why they don't use a foreign key.
 		PRIMARY KEY (UserID),
-		FOREIGN KEY ([Signature]) REFERENCES dbo.Signatures(PrimaryKey)
+		FOREIGN KEY ([Signature]) REFERENCES dbo.Signatures(PrimaryKey) ON DELETE CASCADE
 	) ON [PRIMARY]
 END
 GO

@@ -7,18 +7,27 @@ class CoachesController:
 
     def checkLogin(self, username, password):
         self.cursor = self.cnxn.cursor()
+        print("User:")
+        print(username)
+        print("Pass:")
+        print(password)
         self.cursor.execute("SELECT * FROM Coaches WHERE Username = '"+str(username)+"'")
         field_names = [i[0] for i in self.cursor.description]
-        userIdx = 0
+        userIdx = 1
         for field in field_names:
             if field == "Username":
                 break
             userIdx+=1
-        user = self.cursor.fetchall()[0]
+        results = self.cursor.fetchall()
+        if not results:
+            return False
+        user = (results[0]) or None
+        if user == None:
+            return False
         print(user)
         print(user[userIdx])
         token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
-
+        print(token)
         # returns if the login information is correct for the user.
         return token == user[userIdx]
 

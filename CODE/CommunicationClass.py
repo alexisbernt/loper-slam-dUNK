@@ -12,6 +12,7 @@ from Table_Coaches import CoachesController
 from Table_MessagesCtoA import MessagesCtoAController
 from Table_MessagesCtoT import MessagesCtoTController
 from Table_Teams import TeamsController
+from dotenv import load_dotenv
 #---
 
 # Blake note: We will need different behavior for athletes and coaches. Let's assume we're working with a coach for now.
@@ -27,10 +28,14 @@ class Communication:
         #--- Stuff for connecting with the SQL Server
         # change settings to my own
         # change to try to get to work with .env file
-        driverStr = os.environ.get('DRIVER') or "{SQL Server}"
-        serverStr = os.environ.get('SERVER') or "BERNTTOAST"
-        databaseStr = os.environ.get('DATABASE') or "loperslamdUNK"
-        trustedConStr = os.environ.get('TRUSTED_CONNECTION') or "yes"
+        load_dotenv()
+        driverStr = os.getenv('DRIVER')
+        serverStr = os.getenv('SERVER')
+        databaseStr = os.getenv('DATABASE')
+        trustedConStr = os.getenv('TRUSTED_CONNECTION')
+        if serverStr == "BERNTTOAST":
+            print("aaaaaaaaaaaaaaaaa")
+            return
         print("Driver="+driverStr+";")
         print("Server="+serverStr+";")
         print("Database="+databaseStr+";")

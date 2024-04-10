@@ -3,16 +3,20 @@ import pyodbc
 
 
 class EventsController:
-    def __init__(self):
-        self.cnxn = pyodbc.connect(
-            "Driver={SQL Server};"
-            "Server=MSI;"
-            "Database=LoperSlamdUNKDB;"
-            "Trusted_Connection=yes;"
-        )
+    def __init__(self,cnxn):
+        self.cnxn = cnxn
+        self.cursor = self.cnxn.cursor()
+        #don't reconnect to the server! We have an existing connection that can be used.
+        
+        # self.cnxn = pyodbc.connect(
+        #     "Driver={SQL Server};"
+        #     "Server=MSI;"
+        #     "Database=LoperSlamdUNKDB;"
+        #     "Trusted_Connection=yes;"
+        # )
 
         # Our main connection to the server. Use this variable to interact with it through queries.
-        self.cursor = self.cnxn.cursor()
+        # self.cursor = self.cnxn.cursor()
 
     def printContent(self):
         # Go through each row in the currently selected data and print it out.

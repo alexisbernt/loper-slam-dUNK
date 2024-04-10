@@ -17,8 +17,8 @@ CREATE TABLE [dbo].[MessagesCtoA](
 		CoachID INT,
 		AthleteID INT,
 		PRIMARY KEY (MessageID),
-		FOREIGN KEY (CoachID) REFERENCES dbo.Coaches(CoachID),
-		FOREIGN KEY (AthleteID) REFERENCES dbo.Athletes(AthleteID)
+		FOREIGN KEY (CoachID) REFERENCES dbo.Coaches(CoachID) ON DELETE CASCADE,
+		FOREIGN KEY (AthleteID) REFERENCES dbo.Athletes(AthleteID) ON DELETE CASCADE
 	) ON [PRIMARY] --kinda redundant definition of where very large files go. If we had a custom file group it would matter but it's just going to the default location for now. Don't worry about this line in other words.
 END
 --we could do a drop table and then recreate the table here also... For now this will do though.

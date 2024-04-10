@@ -14,9 +14,9 @@ class AthletesController:
             if field == "Username":
                 break
             userIdx+=1
-        user = self.cursor.fetchall()[0]
-        print(user)
-        print(user[userIdx])
+        user = (self.cursor.fetchall()[0]) or None
+        if user == None:
+            return False
         token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
 
         # returns if the login information is correct for the user.
@@ -51,6 +51,7 @@ class AthletesController:
             return False
         else:
             return True
+
     def removeAthlete(self, id):
         self.cursor = self.cnxn.cursor()
         try:
