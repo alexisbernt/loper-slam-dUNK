@@ -36,7 +36,7 @@ class EventsController:
             monthEvents.append(row)
        # self.printContent()
         return monthEvents
-    def addEvent(self, name, date, team):
+    def addEventQuery(self, name, date, team):
         self.cursor = self.cnxn.cursor()
         self.cursor.execute("INSERT INTO Events (Name, Date, TeamID) VALUES ('" + name + "','" + date + "', '" + str(
             team) + "'); COMMIT;")
