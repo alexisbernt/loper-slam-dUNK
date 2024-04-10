@@ -1,9 +1,11 @@
 import calendar
 from tkinter import simpledialog
+import datetime
 
 import matplotlib.pyplot as plt
 import tkinter as tk
 from Table_Events import EventsController
+
 
 
 w_days = 'Sun Mon Tue Wed Thu Fri Sat'.split()
@@ -86,21 +88,28 @@ class Calendar:
         self.show()
 
     def addMultipleEvents(self, eventList):
+        self.events = [[[] for day in week] for week in self.cal]
+
         for event in eventList:
             name = event[0]
             date = event[1]
             day = date.split('/')[1]
             if day.startswith('0'):
                 day = day[1]
-
             week, w_day = self.dayIndex(int(day))
             self.events[week][w_day].append(name)
 
 
     def promptEvent(self):
         name = simpledialog.askstring("Input", "Enter Event Name: ")
-        day = int(simpledialog.askstring("Input", "Enter Day: "))
-        self.addEvent(day, name)
+        date = simpledialog.askstring("Input", "Enter in Format(MM/DD/YYYY) ")
+        self.eventsController.addEventQuery(name, date, 1)
+        currentDate = datetime.datetime.now()
+        month_events = self.eventsController.getMonthEvents(currentDate.month, currentDate.year)
+        self.addMultipleEvents(month_events)
+        plt.close()
+        self.show()
+
 
     def forward_call(self, *args, **kwargs):
         print("forward call")
