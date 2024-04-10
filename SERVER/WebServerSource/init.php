@@ -2,7 +2,8 @@
 
 $serverName = "SQL Server"; 
 $uid = "CoachLogin";   
-$pwd = "toast&s3ri@l#s";  
+$pwd = "toast&s3ri@l#s";
+$otherPwd = "mister3p@ss4u";
 $databaseName = "LoperSlamdUNK"; 
 
 $connectionInfo = array( "UID"=>$uid,                            

@@ -15,6 +15,8 @@ CREATE TABLE [dbo].[Coaches](
 		[CoachID] [int] IDENTITY(1,1) NOT NULL,
 		[Name] [nvarchar](255) NOT NULL,
 		[Description] [nvarchar](max) NULL,
+		[Username] nvarchar(255) NOT NULL UNIQUE,
+		[Password] nvarchar(255) NOT NULL,
 		PRIMARY KEY (CoachID),
 	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY] --kinda redundant definition of where very large files go. If we had a custom file group it would matter but it's just going to the default location for now. Don't worry about this line in other words.
 END

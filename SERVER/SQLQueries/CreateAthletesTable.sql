@@ -13,6 +13,8 @@ CREATE TABLE [dbo].[Athletes](
 		AthleteID int IDENTITY(1,1) NOT NULL,
 		[Name] [nvarchar](255) NOT NULL,
 		TeamID int NULL,
+		[Username] nvarchar(255) NOT NULL UNIQUE,
+		[Password] nvarchar(255) NOT NULL,
 		PRIMARY KEY (AthleteID),
 		FOREIGN KEY (TeamID) REFERENCES dbo.Teams(TeamID)
 	) ON [PRIMARY] --kinda redundant definition of where very large files go. If we had a custom file group it would matter but it's just going to the default location for now. Don't worry about this line in other words.

@@ -1,7 +1,28 @@
+from base64 import b64encode
+
 class CoachesController:
     def __init__(self,cnxn):
         self.cnxn = cnxn
         self.cursor = self.cnxn.cursor()
+
+    def checkLogin(self, username, password):
+        self.cursor = self.cnxn.cursor()
+        self.cursor.execute("SELECT * FROM Coaches WHERE Username = '"+str(username)+"'")
+        field_names = [i[0] for i in self.cursor.description]
+        userIdx = 0
+        for field in field_names:
+            if field == "Username":
+                break
+            userIdx+=1
+        user = self.cursor.fetchall()[0]
+        print(user)
+        print(user[userIdx])
+        token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
+
+        # returns if the login information is correct for the user.
+        return token == user[userIdx]
+
+
 
     def printContent(self):
         # Go through each row in the currently selected data and print it out.
@@ -20,10 +41,12 @@ class CoachesController:
         self.cursor.execute("SELECT * FROM Coaches where CoachID = '"+str(id)+"'")
         return self.cursor.fetchall()
 
-    def addCoach(self, name, description):
+    def addCoach(self, name, description, username, password):
         self.cursor = self.cnxn.cursor()
+        # We use a token that uses both the username and password so it's harder for an attacker to decode the password.
+        token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
         try:
-            self.cursor.execute("INSERT INTO Coaches (Name, Description) VALUES ('"+str(name)+"', '"+str(description)+"'); COMMIT;")
+            self.cursor.execute("INSERT INTO Coaches (Name, Description, Username, Password) VALUES ('"+str(name)+"', '"+str(description)+"', '"+str(username)+"', '"+str(token)+"'); COMMIT;")
         except:
             return False
         else:

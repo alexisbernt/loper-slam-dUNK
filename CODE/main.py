@@ -7,7 +7,10 @@ from tkinter import Label, Button
 from RandomizerClass import RandomClass
 from CommunicationClass import Communication
 from CalendarClass import Calendar
+
 from Table_Events import EventsController
+from Table_Athletes import AthletesController
+from Table_Coaches import CoachesController
 
 # Ideas to clear the screen (so we can put everything on the same screen)
 # I made a self.on_screen = [] list and that is how we will control
@@ -20,6 +23,8 @@ class SlamdUNK:
         self.window.geometry(f'{self.window.winfo_screenwidth() // 2}x{self.window.winfo_screenheight() // 1.5:.0f}')
         self.on_screen = []
         self.notes = []
+        self.user_type = 0
+        self.tempInt = tk.IntVar()
         self.sign_in_screen()
         self.window.mainloop()
 
@@ -34,13 +39,30 @@ class SlamdUNK:
         # for item in self.on_screen:
         #     item.pack_forget()
 
+    def select_user_type(self):
+        self.user_type = self.tempInt.get()
+        print(self.user_type)
+
     def sign_in_screen(self):
+        self.communication = Communication()  # We need commmunication w/ SQL Server right away to get username / password info
+
         self.clear_screen()
         self.clear_notes()
         sign_in_page_title = Label(self.window, text="Welcome to loperslamdUNK!", font=("Ariel", 28), pady=10)
         self.on_screen.append(sign_in_page_title)
         sign_in_page_title.pack()
         # FOR USERS TO SIGN IN
+        self.tempInt = tk.IntVar()
+        R1 = tk.Radiobutton(self.window, text="Athlete Login", font=("Ariel", 18), variable=self.tempInt, value=1,
+                        command=self.select_user_type)
+        self.on_screen.append(R1)
+        R1.pack()
+
+        R2 = tk.Radiobutton(self.window, text="Coach Login", font=("Ariel", 18), variable=self.tempInt, value=2,
+                        command=self.select_user_type)
+        self.on_screen.append(R2)
+        R2.pack()
+
         username_label = Label(self.window, text="Enter username", font=("Ariel", 18))
         self.on_screen.append(username_label)
         username_label.pack()
@@ -50,6 +72,8 @@ class SlamdUNK:
         password_label = Label(self.window, text="Enter password", font=("Ariel", 18))
         self.on_screen.append(password_label)
         password_label.pack()
+
+
         password_entry = tk.Entry(self.window)
         self.on_screen.append(password_entry)
         password_entry.pack()
@@ -63,6 +87,21 @@ class SlamdUNK:
         # Instead hook it up, so it checks to see if username and password
         # are valid (in database). If so, login, else error.
         # LOGIC ----------------------------
+
+        if self.user_type == 1:
+            #athlete login...
+            athleteC = AthletesController(self.communication.cnxn)
+            result = athleteC.checkLogin(username, password)
+            if result != True:
+                return False
+        elif self.user_type == 2:
+            coachC = CoachesController(self.communication.cnxn)
+            result = coachC.checkLogin(username, password)
+            if result != True:
+                return False
+        else:
+            return False
+        print("Login successful!")
         # if name = valid:
         self.dashboard_screen()
         self.addCalendarEvents()

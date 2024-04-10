@@ -1,0 +1,6 @@
+# NOTE: make a copy of this file and rename it to .env and change it how you wish.
+
+DRIVER = "{SQL Server}"
+SERVER = "LAPTOP-3JNM76RU"
+DATABASE = "LoperSlamdUNKDB"
+TRUSTED_CONNECTION = "yes"

@@ -1,7 +1,26 @@
+from base64 import b64encode
+
 class AthletesController:
     def __init__(self,cnxn):
         self.cnxn = cnxn
         self.cursor = self.cnxn.cursor()
+
+    def checkLogin(self, username, password):
+        self.cursor = self.cnxn.cursor()
+        self.cursor.execute("SELECT * FROM Athletes WHERE Username = '"+str(username)+"'")
+        field_names = [i[0] for i in self.cursor.description]
+        userIdx = 0
+        for field in field_names:
+            if field == "Username":
+                break
+            userIdx+=1
+        user = self.cursor.fetchall()[0]
+        print(user)
+        print(user[userIdx])
+        token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
+
+        # returns if the login information is correct for the user.
+        return token == user[userIdx]
 
     def printContent(self):
         # Go through each row in the currently selected data and print it out.
@@ -20,10 +39,12 @@ class AthletesController:
         self.cursor.execute("SELECT * FROM Athletes where AthleteID = '"+str(id)+"'")
         return self.cursor.fetchall()
 
-    def addAthlete(self, name, team = None):
+    def addAthlete(self, name, username, password, team = None):
+        token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
+
         self.cursor = self.cnxn.cursor()
-        intoStr = "(Name, TeamID); COMMIT;"
-        valuesStr = "VALUES ('"+name+", '"+str(team or "")+"'); COMMIT;"
+        intoStr = "(Name, Username, Password, TeamID); COMMIT;"
+        valuesStr = "VALUES ('"+name+", '"+str(username)+", '"+str(token)+", '"+str(team or "")+"'); COMMIT;"
         try:
             self.cursor.execute("INSERT INTO Athletes "+intoStr+" VALUES "+valuesStr+"; COMMIT;")
         except:
