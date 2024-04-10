@@ -8,3 +8,5 @@ passlib
 pbr
 talons
 ttkbootstrap
+python-dotenv
+matplotlib

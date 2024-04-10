@@ -85,16 +85,17 @@ class ExampleClass:
 
     def addAthlete(self, name, username, password, team = None):
         token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
-
         self.cursor = self.cnxn.cursor()
-        intoStr = "(Name, Username, Password, TeamID); COMMIT;"
-        valuesStr = "VALUES ('"+name+", '"+str(username)+", '"+str(token)+", '"+str(team or "")+"'); COMMIT;"
-        try:
-            self.cursor.execute("INSERT INTO Athletes "+intoStr+" VALUES "+valuesStr+"; COMMIT;")
-        except:
-            return False
-        else:
-            return True
+        intoStr = "(Name, TeamID, Username, Password)"
+        valuesStr = "('"+name+"', '"+str(team or "")+"', '"+str(username)+"', '"+str(token)+"')"
+        print("INSERT INTO Athletes "+intoStr+" VALUES "+valuesStr+"; COMMIT;")
+        # try:
+        queryStr = "INSERT INTO Athletes "+intoStr+" VALUES "+valuesStr+";"
+        self.cursor.execute(queryStr)
+        # except:
+        #     return False
+        # else:
+        #     return True
 
     def addTeam(self, name, desc): #ensure name and desc variables have no special characters in them... Otherwise injection might be possible.
         self.cursor = self.cnxn.cursor()
@@ -104,12 +105,12 @@ class ExampleClass:
         self.cursor = self.cnxn.cursor()
         # We use a token that uses both the username and password so it's harder for an attacker to decode the password.
         token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
-        try:
-            self.cursor.execute("INSERT INTO Coaches (Name, Description, Username, Password) VALUES ('"+str(name)+"', '"+str(description)+"', '"+str(username)+"', '"+str(token)+"'); COMMIT;")
-        except:
-            return False
-        else:
-            return True
+        # try:
+        self.cursor.execute("INSERT INTO Coaches (Name, Description, Username, Password) VALUES ('"+str(name)+"', '"+str(description)+"', '"+str(username)+"', '"+str(token)+"'); COMMIT;")
+        # except:
+        #     return False
+        # else:
+        #     return True
 
     def addMessageCtoT(self): #CHANGE BEHAVIOR
         self.cursor = self.cnxn.cursor()
@@ -124,8 +125,9 @@ class ExampleClass:
 
 
 example = ExampleClass()
-# example.addTeam("Team 1","We are team 1")
-# example.addCoach("Coachy McCoacherson","coachman92","coachpass123",10)
+example.addTeam("Team 1","We are team 1")
+# example.addCoach("Coachy McCoacherson","test desc","coachman92","coachpass123")
+example.addAthlete("Austin Kerk","MrKerk87","athletepass",1)
 
 
 print("This shows all the rows of the Athletes table!:")
@@ -143,10 +145,10 @@ example.getMessagesCtoA()
 
 print("\n\nThis shows all the rows of the Admins table!:")
 example.getAdmins()
-print("\n\nThis shows all the rows of the Users table!:")
-example.getUsers()
-print("\n\nThis shows all the rows of the Signatures table!:")
-example.getSignatures()
+# print("\n\nThis shows all the rows of the Users table!:")
+# example.getUsers()
+# print("\n\nThis shows all the rows of the Signatures table!:")
+# example.getSignatures()
 
 
 

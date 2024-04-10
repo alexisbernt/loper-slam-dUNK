@@ -7,18 +7,27 @@ class AthletesController:
 
     def checkLogin(self, username, password):
         self.cursor = self.cnxn.cursor()
+        print("User:")
+        print(username)
+        print("Pass:")
+        print(password)
         self.cursor.execute("SELECT * FROM Athletes WHERE Username = '"+str(username)+"'")
         field_names = [i[0] for i in self.cursor.description]
-        userIdx = 0
+        userIdx = 1
         for field in field_names:
             if field == "Username":
                 break
             userIdx+=1
-        user = (self.cursor.fetchall()[0]) or None
+        results = self.cursor.fetchall()
+        if not results:
+            return False
+        user = (results[0]) or None
         if user == None:
             return False
+        print(user)
+        print(user[userIdx])
         token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
-
+        print(token)
         # returns if the login information is correct for the user.
         return token == user[userIdx]
 
@@ -41,16 +50,17 @@ class AthletesController:
 
     def addAthlete(self, name, username, password, team = None):
         token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
-
         self.cursor = self.cnxn.cursor()
-        intoStr = "(Name, Username, Password, TeamID); COMMIT;"
-        valuesStr = "VALUES ('"+name+", '"+str(username)+", '"+str(token)+", '"+str(team or "")+"'); COMMIT;"
-        try:
-            self.cursor.execute("INSERT INTO Athletes "+intoStr+" VALUES "+valuesStr+"; COMMIT;")
-        except:
-            return False
-        else:
-            return True
+        intoStr = "(Name, TeamID, Username, Password)"
+        valuesStr = "('"+name+"', '"+str(team or "")+"', '"+str(username)+"', '"+str(token)+"')"
+        print("INSERT INTO Athletes "+intoStr+" VALUES "+valuesStr+"; COMMIT;")
+        # try:
+        queryStr = "INSERT INTO Athletes "+intoStr+" VALUES "+valuesStr+"; COMMIT;"
+        self.cursor.execute(queryStr)
+        # except:
+        #     return False
+        # else:
+        #     return True
 
     def removeAthlete(self, id):
         self.cursor = self.cnxn.cursor()
