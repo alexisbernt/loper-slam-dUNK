@@ -65,6 +65,7 @@ class SlamdUNK:
         # LOGIC ----------------------------
         # if name = valid:
         self.dashboard_screen()
+        self.addCalendarEvents()
         # else:
         # messagebox error
 
@@ -74,8 +75,8 @@ class SlamdUNK:
         # That functionality still needs to be implemented/connected
         # self.communication = Communication()  # create instance of the class
         # RIGHT NOW I HAVE COMMENTED CALENDAR CLASS OUT ----------------------------
-        # currentDate = date.today()
-        # self.calendar = Calendar(2004, 3) # create instance of the class
+        currentDate = date.today()
+        self.calendar = Calendar(currentDate.year, currentDate.month)        # create instance of the class
         self.random = RandomClass()  # create instance of the class
         # Clear The Screen all over again
         self.clear_screen()
@@ -111,7 +112,8 @@ class SlamdUNK:
 
     def addCalendarEvents(self):
         events = EventsController()
-        month_events = events.getMonthEvents(3, 2004)  # Change the year and month as needed
+        currentDate = date.today()
+        month_events = events.getMonthEvents(currentDate.month, currentDate.year)  # Change the year and month as needed
 
         self.calendar.addMultipleEvents(month_events)
 
