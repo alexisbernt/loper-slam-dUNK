@@ -5,7 +5,7 @@ from tkinter import Label
 
 import os
 import pyodbc
-#--- Standard table imports we will all be using...
+# --- Standard table imports we will all be using...
 from Table_Athletes import AthletesController
 from Table_Coaches import CoachesController
 # from Table_Events import EventsController
@@ -132,7 +132,25 @@ class Communication:
         else:
             return None
 
+    def display_announcements(self):
+        announcements = self.fetch_announcements()
+        if announcements:
+            # Clear existing announcements from GUI
+            for widget in self.on_screen:
+                widget.pack_forget()
 
+            # Display fetched announcements on GUI
+            for announcement in announcements:
+                announcement_label = Label(self.window, text=announcement, font=("litera", 12))
+                self.on_screen.append(announcement_label)
+                announcement_label.pack()
 
-# run_com_instance = Communication()
-# run_com_instance.reset_for_communicate()
+            # Add button to refresh announcements
+            refresh_button = tk.Button(self.window, text="Refresh", command=self.display_announcements)
+            self.on_screen.append(refresh_button)
+            refresh_button.pack()
+        else:
+            # No announcements to display
+            no_announcement_label = Label(self.window, text="No announcements available.", font=("litera", 12))
+            self.on_screen.append(no_announcement_label)
+            no_announcement_label.pack()
