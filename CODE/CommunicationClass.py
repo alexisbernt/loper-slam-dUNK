@@ -13,19 +13,21 @@ from Table_MessagesCtoA import MessagesCtoAController
 from Table_MessagesCtoT import MessagesCtoTController
 from Table_Teams import TeamsController
 from dotenv import load_dotenv
-#---
+# ---
 
 # Blake note: We will need different behavior for athletes and coaches. Let's assume we're working with a coach for now.
-# Let's hardcode some variables in here so we can actually send messages to the SQL server. We really need an Authentication controller or something.
+# Lets hardcode some variables in here, so we can actually send messages to the SQL server.
+# We really need an Authentication controller or something.
 # If you run this, make sure to put some entries manually into the SQL Server if necessary.
+
 
 class Communication:
     def __init__(self):
-        #--- Hard-coded variables to allow sending of announcements
+        # --- Hard-coded variables to allow sending of announcements
         self.authType = 2                   # 1 for athlete, 2 for coach
         self.userId = 1                     # ID 1 being the first ID in the coach table
-        #---
-        #--- Stuff for connecting with the SQL Server
+        # ---
+        # --- Stuff for connecting with the SQL Server
         # change settings to my own
         # change to try to get to work with .env file
         load_dotenv()
@@ -47,7 +49,7 @@ class Communication:
             "Trusted_Connection="+trustedConStr+";"
         )
         # self.cursor = self.cnxn.cursor()
-        #---
+        # ---
         self.window = tk.Tk()
         self.on_screen = []
         self.announcement_list = []
@@ -105,7 +107,8 @@ class Communication:
 
                 # Teams = coachController.getTeams(CoachID)
                 # if Teams:
-                # TeamID = coachController.getTeams(CoachID)[0] # will give an error if you don't have entry in CoachesTeams pivot table...
+                # TeamID = coachController.getTeams(CoachID)[0]
+                # will give an error if you don't have entry in CoachesTeams pivot table...
                 # print("Team ID is:")
                 # print(TeamID)
 
@@ -122,12 +125,14 @@ class Communication:
 
     def fetch_announcements(self):
         # Code to fetch announcements from SQL server
-        if self.authType == 2:  # Assuming coach
+        if self.authType == 2:
             msgController = MessagesCtoTController(cnxn=self.cnxn)
             announcements = msgController.getMessagesForCoach(self.userId)  # Fetch announcements for the coach
             return announcements
         else:
             return None
+
+
 
 # run_com_instance = Communication()
 # run_com_instance.reset_for_communicate()
