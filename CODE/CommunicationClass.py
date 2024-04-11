@@ -81,7 +81,7 @@ class Communication:
                 coachController = CoachesController(cnxn=self.cnxn)
                 teamController = TeamsController(cnxn=self.cnxn)
                 msgController = MessagesCtoTController(cnxn=self.cnxn)
-                
+
                 # - If there are no coaches, create one.
                 coaches = coachController.getCoaches()
                 if not coaches:
@@ -102,7 +102,7 @@ class Communication:
                     coachController.attachTeam(CoachID, TeamID) # change this value to something that works for you...
 
                 # ---
-                
+
                 # Teams = coachController.getTeams(CoachID)
                 # if Teams:
                 # TeamID = coachController.getTeams(CoachID)[0] # will give an error if you don't have entry in CoachesTeams pivot table...
@@ -119,6 +119,15 @@ class Communication:
             self.announcement_list.append(announce)
             comm_textbox.delete(0, tk.END)
             print("Announcement sent: ", announce)
+
+    def fetch_announcements(self):
+        # Code to fetch announcements from SQL server
+        if self.authType == 2:  # Assuming coach
+            msgController = MessagesCtoTController(cnxn=self.cnxn)
+            announcements = msgController.getMessagesForCoach(self.userId)  # Fetch announcements for the coach
+            return announcements
+        else:
+            return None
 
 # run_com_instance = Communication()
 # run_com_instance.reset_for_communicate()
