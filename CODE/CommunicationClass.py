@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 
 
 class Communication:
-    def __init__(self,window):
+    def __init__(self,window,onscreen):
         # --- Hard-coded variables to allow sending of announcements
         self.authType = 2                   # 1 for athlete, 2 for coach
         self.userId = 1                     # ID 1 being the first ID in the coach table
@@ -48,15 +48,16 @@ class Communication:
         # self.cursor = self.cnxn.cursor()
         # ---
         self.window = window
-        self.on_screen = []
+        self.on_screen = onscreen
         self.announcement_list = []
-        self.window.title("Communication")
-        self.window.geometry(f'{self.window.winfo_screenwidth() // 4}x{self.window.winfo_screenheight() // 3:.0f}')
+        # self.window.title("Communication")
+        # self.window.geometry(f'{self.window.winfo_screenwidth() // 4}x{self.window.winfo_screenheight() // 3:.0f}')
 
     def reset_for_communicate(self):
         # Clear The Screen_________
         for item in self.on_screen:
             item.pack_forget()
+        self.window.title("Communication")
         self.on_screen = []
         # Title____________________________________________________________
         communication_title = Label(self.window, text="COMMUNICATE", font=("litera", 25), pady=10)
