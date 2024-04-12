@@ -72,6 +72,8 @@ class Communication:
         self.on_screen.append(send_button)
         send_button.pack()
 
+        self.display_announcements()
+
     def send_announcement(self, comm_textbox):
         announce = comm_textbox.get()
         if announce:
