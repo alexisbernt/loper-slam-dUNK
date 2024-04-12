@@ -20,7 +20,9 @@ class AthletesController:
             userIdx+=1
         results = self.cursor.fetchall()
         if not results:
+            print("empty")
             return False
+        print(results[0])
         user = (results[0]) or None
         if user == None:
             return False

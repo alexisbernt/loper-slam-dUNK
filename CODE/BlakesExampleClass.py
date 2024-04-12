@@ -136,7 +136,7 @@ class ExampleClass:
 
 
 example = ExampleClass()
-example.addTeam("Team 1","We are team 1")
+# example.addTeam("Team 1","We are team 1")
 # example.addCoach("Coachy McCoacherson","test desc","coachman92","coachpass123")
 example.addAthlete("Austin Kerk","MrKerk87","athletepass",1)
 
