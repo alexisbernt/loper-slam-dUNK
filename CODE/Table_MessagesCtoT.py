@@ -9,6 +9,10 @@ class MessagesCtoTController:
         for row in self.cursor:
             print('row = %r' % (row,))
 
+    def getMessagesForCoach(self,coach):
+        self.cursor = self.cnxn.cursor()
+        self.cursor.execute("SELECT * FROM MessagesCtoT where CoachID = '"+coach+"'")
+        return self.cursor.fetchall()
 
     def getMessagesCtoT(self):
         self.cursor = self.cnxn.cursor()

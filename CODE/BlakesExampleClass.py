@@ -1,14 +1,25 @@
 from base64 import b64encode
 import pyodbc
+import os
+from dotenv import load_dotenv
 class ExampleClass:
     def __init__(self):
         # We can make this pull info from a .env file if we want to personalize it without overwriting each other's settings we need.
         # This is just a quick example though so I'll leave it for now. Feel free to modify on your end for testing and then undoing changes.
+        load_dotenv()
+        driverStr = os.getenv('DRIVER')
+        serverStr = os.getenv('SERVER')
+        databaseStr = os.getenv('DATABASE')
+        trustedConStr = os.getenv('TRUSTED_CONNECTION')
+        print("Driver="+driverStr+";")
+        print("Server="+serverStr+";")
+        print("Database="+databaseStr+";")
+        print("Trusted_Connection="+trustedConStr+";")
         self.cnxn = pyodbc.connect(
-            "Driver={SQL Server};"
-            "Server=LAPTOP-3JNM76RU;"
-            "Database=LoperSlamdUNKDB;"
-            "Trusted_Connection=yes;"
+            "Driver="+driverStr+";"
+            "Server="+serverStr+";"
+            "Database="+databaseStr+";"
+            "Trusted_Connection="+trustedConStr+";"
         )
 
         # Our main connection to the server. Use this variable to interact with it through queries.

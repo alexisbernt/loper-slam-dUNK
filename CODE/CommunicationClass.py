@@ -35,9 +35,6 @@ class Communication:
         serverStr = os.getenv('SERVER')
         databaseStr = os.getenv('DATABASE')
         trustedConStr = os.getenv('TRUSTED_CONNECTION')
-        if serverStr == "BERNTTOAST":
-            print("aaaaaaaaaaaaaaaaa")
-            return
         print("Driver="+driverStr+";")
         print("Server="+serverStr+";")
         print("Database="+databaseStr+";")
