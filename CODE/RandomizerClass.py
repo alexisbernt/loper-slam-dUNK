@@ -31,7 +31,7 @@ class RandomClass:
 
 RandomClass()
 
-# CODE TRYING TO IMPORT NAMES -------------
+# CODE TRYING TO IMPORT NAMES (You can import names if you connect CSV file) -------------
 
 # def names_library():
 #     # a function to store remember names that were entered in the past
