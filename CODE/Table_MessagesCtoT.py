@@ -11,7 +11,7 @@ class MessagesCtoTController:
 
     def getMessagesForCoach(self,coach):
         self.cursor = self.cnxn.cursor()
-        self.cursor.execute("SELECT * FROM MessagesCtoT where CoachID = '"+coach+"'")
+        self.cursor.execute("SELECT * FROM MessagesCtoT where CoachID = '"+str(coach)+"'")
         return self.cursor.fetchall()
 
     def getMessagesCtoT(self):
