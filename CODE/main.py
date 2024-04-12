@@ -44,7 +44,7 @@ class SlamdUNK:
         print(self.user_type)
 
     def sign_in_screen(self):
-        self.communication = Communication()  # We need commmunication w/ SQL Server right away to get username / password info
+        self.communication = Communication(self.window)  # We need commmunication w/ SQL Server right away to get username / password info
 
         self.clear_screen()
         self.clear_notes()

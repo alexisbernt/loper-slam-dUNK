@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 
 
 class Communication:
-    def __init__(self):
+    def __init__(self,window):
         # --- Hard-coded variables to allow sending of announcements
         self.authType = 2                   # 1 for athlete, 2 for coach
         self.userId = 1                     # ID 1 being the first ID in the coach table
@@ -47,7 +47,7 @@ class Communication:
         )
         # self.cursor = self.cnxn.cursor()
         # ---
-        self.window = tk.Tk()
+        self.window = window
         self.on_screen = []
         self.announcement_list = []
         self.window.title("Communication")
