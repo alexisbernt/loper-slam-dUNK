@@ -107,6 +107,9 @@ class SlamdUNK:
         self.addCalendarEvents()
         # else:
         # messagebox error
+    def do_communicate(self):
+        self.communication.reset_for_communicate()
+        self.back_button()
 
     def dashboard_screen(self):
         # RIGHT NOW I HAVE COMMENTED COMMUNICATION CLASS OUT ----------------------------
@@ -127,7 +130,7 @@ class SlamdUNK:
         # You can use the command: command=lambda: self.[call class].[call function]() to connect the button
         # Buttons for navigating to different pages w/n the application
         communication_button = Button(self.window, text="COMMUNICATE", font=("Ariel", 15),
-                                      command=lambda: self.communication.reset_for_communicate())
+                                      command=lambda: self.do_communicate())
         self.on_screen.append(communication_button)
         communication_button.pack()
         random_button = Button(self.window, text="RANDOM", font=("Ariel", 15),
