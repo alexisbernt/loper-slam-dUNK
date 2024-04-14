@@ -23,3 +23,4 @@ Our group will be creating a software for athletic coaches to organize their tea
 [EXECUTIVE SUMMARY](https://github.com/alexisbernt/loper-slam-dUNK/blob/906a9aafb52e05362f1690cd5bad9c498808643c/Documentation/Week%201/4.2.md)
 
 ### The Theme Image
+[THEME IMAGE](https://github.com/alexisbernt/loper-slam-dUNK/blob/4cee8e9e7352ff97d848c7f9a9af55f6001a3210/Documentation/Week%203/loper%20slam%20dUNK%20image.pdf)
