@@ -3,10 +3,9 @@
 > It does this by using the following classes: Calendar, Tkinter, Matplotlib, and datetime to create, edit, and validate information in the Calendar class.
 
 # Steps taken and challenges
-> To begin the class, we had to make the GUI for the user. This was not too challenging as using TKinter is fairly straight
-> forward. After that was implemented we added functionality by allowing the user to "send" an announcment that was initially
-> saved to a list. The most difficult part was integrating the SQL server to the announcement functionality. Rather than save
-> it to a list, the last iteration saves the announcement to a table, which can then be fetched if needed by the athletes. Because of this, the communcation class ended up being quite large as there was a lot to implement.
+> When first creating the Calendar class we first created the class constructor which included values to represent each month's calendar and as well as other variables such as a calendar object to ensure that each date existed when creating and editing it.
+> Then the most difficult part in creating the calendar class was integrating the SQL server to add events from the events table when generating different calendars. There were multiple ways to go back implementing the SQL server to efficently
+> add, delete and generate events to the calendars but landed on our current implementation to interact with the database. 
 
 # Functionality
 > The class functions by intializing the GUI using TKinter methods once the communication button is pressed on the main dashboard. Once intialized, the user will have two options depending on if they logged in as a coach or an athlete. If logged in as a coach, the user is given the option to send an announcement using a textbox and a send announcement button. They can also view recent announcements with a refresh announcements button. Once sent, the announcement is added to an announcement table in the SQL server. If logged in as an athlete, you can only receive announcements using the refresh button.
