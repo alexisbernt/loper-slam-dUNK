@@ -3,7 +3,7 @@
 > It does this by using the following classes: Calendar, Tkinter, Matplotlib, and datetime to create, edit, and validate information in the Calendar class.
 
 # Steps taken and challenges
-> When first creating the Calendar class we first created the class constructor which included values to represent each month's calendar and as well as other variables such as a calendar object to ensure that each date existed when creating and editing it.
+> When first creating the Calendar class we first created the class constructor which included values to help represent each month's calendar and as well as other variables such as a calendar object to ensure that each date existed when creating and editing it.
 > Then the most difficult part in creating the calendar class was integrating the SQL server to add events from the events table when generating different calendars. There were multiple ways for implementing the SQL server to efficiently 
 > add, delete, and generate events to the calendars but landed on our current implementation to interacting with the database. 
 
