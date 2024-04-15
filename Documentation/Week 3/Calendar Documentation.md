@@ -13,6 +13,6 @@
 > The only option currently available is the add events button which will then prompt the user for a name and a date in the format of MM/DD/YYYY to then be added to the events table while at the same time closing the calendar and regenerating it with the new event.
 
 # How to use the functionality within the program
-1.2fkjds
-2.sdf
-3fkjsdj
+1. 2fkjds
+2. sdf
+3. fkjsdj
