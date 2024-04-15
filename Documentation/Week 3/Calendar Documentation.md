@@ -13,6 +13,11 @@
 > The only option currently available is the add events button which will then prompt the user for a name and a date in the format of MM/DD/YYYY to then be added to the events table while at the same time closing the calendar and regenerating it with the new event.
 
 # How to use the functionality within the program
-1. 2fkjds
-2. sdf
-3. fkjsdj
+1. Open up application
+2. Use login
+3. From Dashboard, click on Calendar
+4. Once calendar has generated then user is allowed to select add events
+5. Enter an event name
+6. Enter date of event (must be in format:MM/DD/YY)
+7. Calendar will then regenerate with new events
+8. When closing the calendar user will return back to the Dashboard
