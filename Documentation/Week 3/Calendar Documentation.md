@@ -18,6 +18,6 @@
 3. From Dashboard, click on Calendar
 4. Once calendar has generated then user is allowed to select add events
 5. Enter an event name
-6. Enter date of event (must be in format:MM/DD/YY)
-7. Calendar will then regenerate with new events
+6. Enter date of event (MUST be in format:MM/DD/YY)
+7. Calendar then regenerate with new events
 8. When closing the calendar user will return back to the Dashboard
