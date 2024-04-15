@@ -18,6 +18,9 @@ class EventsController:
         # Our main connection to the server. Use this variable to interact with it through queries.
         # self.cursor = self.cnxn.cursor()
 
+    def sanitizeInput(self,input):
+        return input.replace("'","''")
+
     def printContent(self):
         # Go through each row in the currently selected data and print it out.
         # We can move to something Tkinter based quite easily from here.
@@ -41,8 +44,10 @@ class EventsController:
        # self.printContent()
         return monthEvents
     def addEventQuery(self, name, date, team):
+        name = self.sanitizeInput(name)
+        date = self.sanitizeInput(date)
         self.cursor = self.cnxn.cursor()
-        self.cursor.execute("INSERT INTO Events (Name, Date, TeamID) VALUES ('" + name + "','" + date + "', '" + str(
+        self.cursor.execute("INSERT INTO Events (Name, Date, TeamID) VALUES ('" + str(name) + "','" + str(date) + "', '" + str(
             team) + "'); COMMIT;")
 
 

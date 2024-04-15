@@ -5,7 +5,12 @@ class AthletesController:
         self.cnxn = cnxn
         self.cursor = self.cnxn.cursor()
 
+    def sanitizeInput(self,input):
+        return input.replace("'","''")
+
     def checkLogin(self, username, password):
+        username = self.sanitizeInput(username)
+        password = self.sanitizeInput(password)
         self.cursor = self.cnxn.cursor()
         print("User:")
         print(username)
@@ -51,6 +56,9 @@ class AthletesController:
         return self.cursor.fetchall()
 
     def addAthlete(self, name, username, password, team = None):
+        username = self.sanitizeInput(username)
+        password = self.sanitizeInput(password)
+        name = self.sanitizeInput(name)
         token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
         self.cursor = self.cnxn.cursor()
         intoStr = "(Name, TeamID, Username, Password)"
@@ -80,13 +88,15 @@ class AthletesController:
         try:
             updateString = "UPDATE Athletes "
             setString = ""
-            whereString = " WHERE AthleteID = '"+id+"'"
+            whereString = " WHERE AthleteID = '"+str(id)+"'"
             x = 0
-            setString += "SET "+colNames[0]+" = "+colVals[0]
+            colVals[0] = self.sanitizeInput(colVals[0])
+            setString += "SET "+str(colNames[0])+" = "+str(colVals[0])
             colVals.pop(0)
             colNames.pop(0)
             for col in colNames:
-                setString += ", SET "+col+" = "+colVals[x]
+                colVals[x] = self.sanitizeInput(colVals[x])
+                setString += ", SET "+str(col)+" = "+str(colVals[x])
                 x+=1
             self.cursor.execute(updateString+setString+whereString)
         except:

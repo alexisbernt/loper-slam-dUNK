@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS [dbo].Users
 if not EXISTS(select * from sys.tables t join sys.schemas s on (t.schema_id = s.schema_id) where s.name = 'dbo' and t.name = 'Users')
 BEGIN
 CREATE TABLE [dbo].[Users](
-		[Signature] int NOT NULL,
+		[Signature] nvarchar(255) UNIQUE NOT NULL,
 		UserID int IDENTITY(1,1) NOT NULL,
 		[Name] [nvarchar](255) NOT NULL,
 		Email [nvarchar](255) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE [dbo].[Users](
 		InstallDateTime DATETIME NOT NULL,
 		-- PRIMARY KEY ([Signature]), -- this is what they use in their made_db.py file... Not sure why they don't use a foreign key.
 		PRIMARY KEY (UserID),
-		FOREIGN KEY ([Signature]) REFERENCES dbo.Signatures(PrimaryKey) ON DELETE CASCADE
+		FOREIGN KEY ([Signature]) REFERENCES dbo.Signatures([Signature]) ON DELETE CASCADE
 	) ON [PRIMARY]
 END
 GO

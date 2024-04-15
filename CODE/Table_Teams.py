@@ -5,6 +5,9 @@ class TeamsController:
         self.cnxn = cnxn
         self.cursor = self.cnxn.cursor()
 
+    def sanitizeInput(self,input):
+        return input.replace("'","''")
+    
     def printContent(self):
         # Go through each row in the currently selected data and print it out.
         # We can move to something Tkinter based quite easily from here.
@@ -23,6 +26,7 @@ class TeamsController:
         return self.cursor.fetchall()
 
     def addTeam(self, name, description):
+        description = self.sanitizeInput(description)
         self.cursor = self.cnxn.cursor()
         # try:
         self.cursor.execute("INSERT INTO Teams (Name, Description) VALUES ('"+str(name)+"', '"+str(description)+"'); COMMIT;")
@@ -72,10 +76,12 @@ class TeamsController:
             setString = ""
             whereString = " WHERE TeamID = '"+id+"'"
             x = 0
+            colVals[0] = self.sanitizeInput(colVals[0])
             setString += "SET "+colNames[0]+" = "+colVals[0]
             colVals.pop(0)
             colNames.pop(0)
             for col in colNames:
+                colVals[x] = self.sanitizeInput(colVals[x])
                 setString += ", SET "+col+" = "+colVals[x]
                 x+=1
             self.cursor.execute(updateString+setString+whereString)

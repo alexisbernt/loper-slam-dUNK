@@ -108,6 +108,8 @@ class SlamdUNK:
         # else:
         # messagebox error
     def do_communicate(self):
+        self.clear_screen()
+        self.clear_notes()
         self.communication.reset_for_communicate()
         self.back_button()
 

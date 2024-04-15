@@ -5,7 +5,12 @@ class CoachesController:
         self.cnxn = cnxn
         self.cursor = self.cnxn.cursor()
 
+    def sanitizeInput(self,input):
+        return input.replace("'","''")
+    
     def checkLogin(self, username, password):
+        username = self.sanitizeInput(username)
+        password = self.sanitizeInput(password)
         self.cursor = self.cnxn.cursor()
         print("User:")
         print(username)
@@ -51,6 +56,10 @@ class CoachesController:
         return self.cursor.fetchall()
 
     def addCoach(self, name, description, username, password):
+        username = self.sanitizeInput(username)
+        password = self.sanitizeInput(password)
+        name = self.sanitizeInput(name)
+        description = self.sanitizeInput(description)
         self.cursor = self.cnxn.cursor()
         # We use a token that uses both the username and password so it's harder for an attacker to decode the password.
         token = b64encode(f"{username}:{password}".encode('utf-8')).decode("ascii")
@@ -100,13 +109,15 @@ class CoachesController:
         try:
             updateString = "UPDATE Coaches "
             setString = ""
-            whereString = " WHERE CoachID = '"+id+"'"
+            whereString = " WHERE CoachID = '"+str(id)+"'"
             x = 0
+            colVals[0] = self.sanitizeInput(colVals[0])
             setString += "SET "+colNames[0]+" = "+colVals[0]
             colVals.pop(0)
             colNames.pop(0)
             for col in colNames:
-                setString += ", SET "+col+" = "+colVals[x]
+                colVals[x] = self.sanitizeInput(colVals[x])
+                setString += ", SET "+str(col)+" = "+str(colVals[x])
                 x+=1
             self.cursor.execute(updateString+setString+whereString)
         except:
