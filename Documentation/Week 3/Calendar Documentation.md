@@ -9,8 +9,8 @@
 
 # Functionality
 > The class functions while the GUI is running which is then able to be generated on the main dashboard when selecting the calendar option. The calendar class will then use the matplotlib to format and generate a calendar for the current month using an array of subplots.
-> The calendar class will also query to the database when first created to process each event for that current month and add them to the calendar in a readable format.
-> The only option currently avaliable is the add events button which will then prompt the user for a name and a date in the format of MM/DD/YYYY to then be added to the events table while at the same time closing the calendar and regenerating it with the new event.
+> The calendar class will also query the database when first created to process each event for that current month and add them to the calendar in a readable format.
+> The only option currently available is the add events button which will then prompt the user for a name and a date in the format of MM/DD/YYYY to then be added to the events table while at the same time closing the calendar and regenerating it with the new event.
 
 # How to use the functionality within the program
 > To use the functionality, you have to do what was described in the prior paragraph. Depending on your login, you can either send AND receive announcements using the two buttons on the GUI, or you can only receive announcements using the refresh button.
