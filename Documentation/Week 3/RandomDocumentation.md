@@ -1,5 +1,4 @@
-#DOCUMENTATION OUTLINE
-
+The Random Generator Feature of loperslamdUNK
 ## Purpose of the class coded
 The purpose of the randomizer class is to randomly generate an athelte. At times, coaches need to make decisions that either (a) don't matter a ton, (b) need to be fair and impartial, or (c) both!
 Having a random generator built-in to the app solves the problem for the coaches!
