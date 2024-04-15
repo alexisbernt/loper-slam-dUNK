@@ -13,4 +13,5 @@
 > The only option currently available is the add events button which will then prompt the user for a name and a date in the format of MM/DD/YYYY to then be added to the events table while at the same time closing the calendar and regenerating it with the new event.
 
 # How to use the functionality within the program
-> To use the functionality, you have to do what was described in the prior paragraph. Depending on your login, you can either send AND receive announcements using the two buttons on the GUI, or you can only receive announcements using the refresh button.
+> To use the functionality of the Calendar class you can review what was stated in the previous paragraph. There are less significant features that weren't mentioned such as the matplotlib allowing the window to be streched so that the calendar can take up the full screen on the users display.
+> Other features would include saving the calendar in a PNG format and also having the option to manipulate the subplots of the calendar for a more personalized view.
