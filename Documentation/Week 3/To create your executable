@@ -1,5 +1,6 @@
-pyinstaller -w --add-data 'BlakesExampleClass.py:.', --add-data 'CalendarClass.py:.' --add-data 'CommunicationClass.py:.', 
---add-data 'RandomizerClass.py:.', --add-data 'Table_Athletes.py:.', --add-data 'Table_Coaches.py:.', --add-data 'Table_Events.py:.', 
---add-data 'Table_MessagesCtoA.py:.', --add-data 'Table_MessagesCtoT.py:.', --add-data 'Table_Teams.py:.’ loperslamdUNK.py
+pyinstaller -w --add-data 'BlakesExampleClass.py:.', --add-data 'CalendarClass.py:.' --add-data 'CommunicationClass.py:.', --add-data 'RandomizerClass.py:.', --add-data 'Table_Athletes.py:.', --add-data 'Table_Coaches.py:.', --add-data 'Table_Events.py:.', --add-data 'Table_MessagesCtoA.py:.', --add-data 'Table_MessagesCtoT.py:.', --add-data 'Table_Teams.py:.' loperslamdUNK.py
 
 May need to run pip install pyinstaller 
+
+Windows Version -->
+pyinstaller -w --add-data "BlakesExampleClass.py;.", --add-data "CalendarClass.py;." --add-data "CommunicationClass.py;.", --add-data "RandomizerClass.py;.", --add-data "Table_Athletes.py;.", --add-data "Table_Coaches.py;.", --add-data "Table_Events.py;.", --add-data "Table_MessagesCtoA.py;.", --add-data "Table_MessagesCtoT.py;.", --add-data "Table_Teams.py;." loperslamdUNK.py
