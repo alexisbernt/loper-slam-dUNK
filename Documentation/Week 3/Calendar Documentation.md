@@ -1,6 +1,6 @@
 # Purpose of the Calendar class
-> The main purpose of the class is to give coaches a visual representation of the team's events for the current and upcoming months, and allow them to create events for the future as well.
-> It does this by using the following classes: calendar, tkinter, matplotlib, and datetime to create, edit and validate information in the Calendar class.
+> The main purpose of the class is to give coaches a visual representation of the team's events for the current and upcoming months and allow them to create events for the future as well.
+> It does this by using the following classes: Calendar, Tkinter, Matplotlib, and datetime to create, edit, and validate information in the Calendar class.
 
 # Steps taken and challenges
 > To begin the class, we had to make the GUI for the user. This was not too challenging as using TKinter is fairly straight
